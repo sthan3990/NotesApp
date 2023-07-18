@@ -1,19 +1,26 @@
 {
-  "name": "sample-expressjs",
+  "name": "node-skeleton",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-	"start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "local": "./node_modules/.bin/nodemon -L --ignore public/",
+    "db:reset": "node bin/resetdb.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "github.com/digitalocean/sample-expressjs"
-  },
-  "author": "",
-  "license": "MIT",
+  "author": "Lighthouse Labs",
+  "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "chalk": "^2.4.2",
+    "dotenv": "^2.0.0",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "pg": "^8.5.0",
+    "sass": "^1.35.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.10"
   }
 }
