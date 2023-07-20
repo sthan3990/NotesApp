@@ -7,15 +7,18 @@
 
 const express = require('express');
 const router  = express.Router();
+const cookieSession = require('cookie-session');
 
 router.get('/', (req, res) => {
-  res.render('users');
+  res.render('login');
 });
 
-router.get('/profile', (req, res) => {
+router.post('/login', (req, res) => {
+  // Compare Password
 
 
-  res.render('profile');
+  // Create cookie
+
 });
 
 module.exports = router;
