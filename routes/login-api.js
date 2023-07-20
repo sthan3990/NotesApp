@@ -38,6 +38,7 @@ router.post('/login', (req, res) => {
         res.redirect("/login");
       }
     })
+
     .catch(err => {
       res
         .status(500)
