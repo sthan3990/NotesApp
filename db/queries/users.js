@@ -19,5 +19,19 @@ const insertUser = (name, password, email) => {
     });
 };
 
+const updateUser = (name, password, email) => {
+  return db.query(`UPDATE users
+       SET name = $1,
+           password = $2,
+           email = $3,
+      WHERE email = $2
+       RETURNING *;`, [name, password, email])
+    .then((result) => {
+      //return result.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
 
-module.exports = { getUsers, insertUser };
+module.exports = { getUsers, insertUser, updateUser};
