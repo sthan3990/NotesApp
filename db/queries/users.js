@@ -7,4 +7,17 @@ const getUsers = () => {
     });
 };
 
-module.exports = { getUsers };
+const insertUser = (name, password, email) => {
+  return db.query(`INSERT INTO users (name, password, email)
+       VALUES ($1, $2, $3)
+       RETURNING *;`, [name, password, email])
+    .then((result) => {
+      return result.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+
+module.exports = { getUsers, insertUser };
