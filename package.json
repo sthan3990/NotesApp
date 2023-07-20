@@ -44,7 +44,10 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
+<<<<<<< HEAD
     "bluebird": "^3.7.2",
+=======
+>>>>>>> d2a91f8 (Create Add User Feature)
     "chalk": "^2.4.2",
     "cookie-session": "^2.0.0",
     "dotenv": "^2.0.0",
