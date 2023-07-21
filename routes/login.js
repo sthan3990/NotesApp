@@ -1,24 +1,54 @@
-/*
- * All routes for Users are defined here
- * Since this file is loaded in server.js into /users,
- *   these routes are mounted onto /users
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
-
 const express = require('express');
-const router  = express.Router();
-const cookieSession = require('cookie-session');
-
-router.get('/', (req, res) => {
-  res.render('login');
-});
-
-router.post('/login', (req, res) => {
-  // Compare Password
+const router = express.Router();
+const bcrypt = require('bcrypt');
 
 
-  // Create cookie
+module.exports = () => {
 
-});
+  router.get('/', (req, res) => {
+    //to check if user is logged in
 
-module.exports = router;
+    if (req.session.user_id) {
+      res.redirect('/todo');
+
+    } else {
+      let templateVars = {
+        user: {id: undefined, name: null}
+      };
+      res.render('../views/login', templateVars);
+    }
+  });
+
+  //for logging in
+
+  router.post('/', async (req, res) => {
+    getUserByEmail(req.body.email)
+      .then(user => {
+        //check if the user exists
+
+        if (!user) {
+          res.json({error: 'User does not exist'});
+
+        } else {
+          //check if the provided password matches the user's stored password
+          if (!bcrypt.compareSync(req.body.password, user.password)) {
+            res.json({error: 'Password does not match'});
+
+          } else {
+            // Set the user_id in the session and redirect to the '/todo' path
+            req.session = { user_id: user.id };
+            res.redirect('/todo');
+
+          }
+        }
+      })
+      .catch(err => {
+        console.error('login error', err);
+      });
+
+  });
+
+  //login after registering
+
+return router;
+}
