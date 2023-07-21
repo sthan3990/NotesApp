@@ -12,10 +12,6 @@ router.get('/', (req, res) => {
   res.render('users');
 });
 
-router.get('/profile', (req, res) => {
 
-
-  res.render('profile');
-});
 
 module.exports = router;
