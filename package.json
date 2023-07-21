@@ -73,9 +73,13 @@
     "helmet": "^7.0.0",
     "morgan": "^1.9.1",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "openai": "^3.3.0",
 =======
 >>>>>>> a1dadac (Created a new file under routes called auth.js which includes the code for register/login/logout. I also had to update some other files to make sure it works, those include server.js and package.json and a few other)
+=======
+    "openai": "^3.3.0",
+>>>>>>> 3681805 (Start AI Feature)
     "pg": "^8.5.0",
     "pg-promise": "^11.5.0",
     "sass": "^1.35.1"
