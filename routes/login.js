@@ -9,7 +9,7 @@ module.exports = () => {
     //to check if user is logged in
 
     if (req.session.user_id) {
-      res.redirect('/todo');
+      res.redirect('/items');
 
     } else {
       let templateVars = {
@@ -37,7 +37,7 @@ module.exports = () => {
           } else {
             // Set the user_id in the session and redirect to the '/todo' path
             req.session = { user_id: user.id };
-            res.redirect('/todo');
+            res.redirect('/itema');
 
           }
         }

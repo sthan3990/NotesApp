@@ -30,8 +30,8 @@ module.exports = () => {
       // Set up a new session with the user_id of the registered user
       req.session = { user_id: addingUser.id };
 
-      // Redirect the user to the '/tasks' page (assuming this is the page after successful registration)
-      res.redirect('/todo');
+      // Redirect the user to the '/items' page (assuming this is the page after successful registration)
+      res.redirect('/items');
     }
   });
 
