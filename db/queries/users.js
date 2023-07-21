@@ -19,5 +19,4 @@ const insertUser = (name, password, email) => {
     });
 };
 
-
-module.exports = { getUsers, insertUser };
+module.exports = { getUsers, insertUser, getuserProfile};

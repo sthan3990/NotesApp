@@ -1,4 +1,5 @@
 -- Drop and recreate Users table (Example)
+-- Page renders category as the true value
 
 DROP TABLE IF EXISTS categories CASCADE;
 CREATE TABLE categories (
