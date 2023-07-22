@@ -57,6 +57,17 @@
     <a class="other" href="/other">Other</a>
 </nav>
 
+<section class="newtask">
+    <form class="taskform" method="POST" action="/tasks" id="taskform">
+    <label for="tasktext" class="tasktext">What task would you like to add today?</label>
+    <br>
+    <textarea name="taskarea" class="taskarea" id="taskarea"></textarea>
+    <div class="taskbutton">
+      <button type="submit" class="taskbutton">Add Task</button>
+    </div>
+  </form>
+</section>
+
 <main>
   <div>
     Eat
@@ -77,10 +88,6 @@
     Other
   </div>
 </main>
-
-<footer>
-  Copyright
-</footer>
 
 >>>>>>> 5ddd521 (add index.ejs, fix main.scss to align with register and login pages)
 </html>
