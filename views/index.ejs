@@ -20,8 +20,48 @@
 
 </head>
 
-<body>
-  <h1>Have fun! 🥔</h1>
-</body>
+<%- include('partials/_header') %>
+
+<nav class="nav-area">
+    <a class="home" href="/">Home</a>
+    <a class="eat" href="/eat">Eat</a>
+    <a class="watch" href="/watch">Watch</a>
+    <a class="read" href="/read">Read</a>
+    <a class="buy" href="/buy">Buy</a>
+    <a class="do" href="/do">Do</a>
+    <a class="other" href="/other">Other</a>
+</nav>
+
+<section class="newtask">
+    <form class="taskform" method="POST" action="/tasks" id="taskform">
+    <label for="tasktext" class="tasktext">What task would you like to add today?</label>
+    <br>
+    <textarea name="taskarea" class="taskarea" id="taskarea"></textarea>
+    <div class="taskbutton">
+      <button type="submit" class="taskbutton">Add Task</button>
+    </div>
+  </form>
+</section>
+
+<main>
+  <div>
+    Eat
+  </div>
+  <div>
+    Watch
+  </div>
+  <div>
+    Read
+  </div>
+  <div>
+    Buy
+  </div>
+  <div>
+    Do
+  </div>
+  <div>
+    Other
+  </div>
+</main>
 
 </html>
