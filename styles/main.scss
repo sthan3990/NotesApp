@@ -97,10 +97,44 @@ main {
 main > div {
   background-color: #f1f1f1;
   width: 500px;
-  margin: 100px;
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-bottom: 100px;
   text-align: center;
   line-height: 500px;
   font-size: 30px;
+}
+
+.newtask {
+  padding-top: 200px;
+  margin-left: 200px;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(158, 205, 215);
+}
+
+.taskform {
+  text-align: center;
+}
+
+.taskarea{
+  margin-top: 5px;
+  font-size: 20px;
+}
+
+.tasktext {
+  font-size: 30px;
+}
+
+.taskbutton {
+  font-size: 20px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.taskarea {
+  width: 600px;
+  resize: none;
 }
 
 table, th, td {
@@ -111,6 +145,11 @@ table, th, td {
 
 th, td {
   padding: 30px;
+  font-size: 25px;
+}
+
+td a {
+  text-decoration: none;
 }
 
 th {
