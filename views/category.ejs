@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Home Page</title>
+  <title>Task Page</title>
 
   <meta charset="UTF-8" >
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
@@ -32,36 +32,35 @@
     <a class="other" href="/other">Other</a>
 </nav>
 
-<section class="newtask">
-    <form class="taskform" method="POST" action="/tasks" id="taskform">
-    <label for="tasktext" class="tasktext">What task would you like to add today?</label>
-    <br>
-    <textarea name="taskarea" class="taskarea" id="taskarea"></textarea>
-    <div class="taskbutton">
-      <button type="submit" class="taskbutton">Add Task</button>
-    </div>
-  </form>
-</section>
-
 <main>
-  <div>
-    Eat
-  </div>
-  <div>
-    Watch
-  </div>
-  <div>
-    Read
-  </div>
-  <div>
-    Buy
-  </div>
-  <div>
-    Do
-  </div>
-  <div>
-    Other
-  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Task</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Completed</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>Description</td>
+          <td>
+            <form method="POST" action="/">
+              <button type="submit">Delete</button>
+            </form>
+          </td>
+          <td>
+            <button type="submit"><a href="/">Edit</a></button>
+          </td>
+          <td>
+            <form method="POST" action="/"></form>
+            <input type="checkbox"><a href="/"></a></button>
+          </form>
+          </td>
+        </tr>
+    </tbody>
+  </table>
 </main>
 
 </html>
