@@ -183,6 +183,9 @@ app.get('/category', (req, res) => {
   res.render('category');
 });
 
+
+=======
+>>>>>>> 416a0f9 (add temp route for viewing category page)
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
