@@ -1,18 +1,167 @@
-body {
+header {
+  height: 120px;
+  background: #cbe1e3;
+  color: #001f73;
+  font-size: 50px;
+  font-family: Frutiger Linotype;
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
+.title {
+  font-size: 60px;
+  float: left;
+  text-decoration: none;
+  padding: 15px;
+}
+
+i {
+  margin-top: 20px;
+}
+
+.header-right {
+  float: right;
+  padding: 15px;
+}
+
+.header-right a {
+  text-decoration: none;
+}
+
+nav {
+  position: fixed;
+  width: 200px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  top: 120px;
+  height: 85%;
+}
 
-  background: rgb(163, 208, 219);
-  background: linear-gradient(
-    227deg,
-    rgba(163, 208, 219, 1) 0%,
-    rgba(163, 176, 219, 1) 20%,
-    rgba(163, 173, 219, 1) 34%,
-    rgba(163, 219, 208, 1) 59%,
-    rgba(163, 208, 219, 1) 74%,
-    rgba(163, 208, 219, 1) 100%
-  );
+.nav-area a {
+  font-size: 40px;
+  color: #e3e7eef5;
+  text-decoration: none;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.nav-area a:hover {
+  color: #040608f5;
+}
+
+.home {
+  background: #899FCF;
+  flex: 1;
+}
+
+.eat {
+  background: #768CC4;
+  flex: 1;
+}
+
+.watch {
+  background: #6279B8;
+  flex: 1;
+}
+
+.read {
+  background: #49516F;
+  flex: 1;
+}
+
+.buy {
+  background: #496F5D;
+  flex: 1;
+}
+
+.do {
+  background: #4C9F70;
+  flex: 1;
+}
+
+.other {
+  background: #6BB089;
+  flex: 1;
+}
+
+main {
+  padding-top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: rgb(158, 205, 215);
+  margin-left: 200px;
+}
+
+main > div {
+  background-color: #f1f1f1;
+  width: 500px;
+  margin: 100px;
+  text-align: center;
+  line-height: 500px;
+  font-size: 30px;
+}
+
+table, th, td {
+  margin-top: 50px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 30px;
+}
+
+th {
+  text-align: left;
+  font-size: 30px;
+}
+
+body {
+  background: rgb(216, 222, 225);
+}
+
+.login {
+  padding-top: 170px;
+  text-align: center;
+}
+
+.register {
+  padding-top: 170px;
+  text-align: center;
+}
+
+.login-form {
+  padding-top: 20px;
+  margin-left: 170px;
+  margin-right: 170px;
+  font-size: 25px;
+  border-radius: 250px;
+  background-color: #899FCF;
+}
+
+.register-form {
+  padding-top: 20px;
+  margin-left: 170px;
+  margin-right: 170px;
+  font-size: 25px;
+  border-radius: 250px;
+  background-color: #899FCF;
+}
+
+.form-group {
+  padding: 20px;
+}
+
+.form-control {
+  width: 30%;
+}
+
+.btnn {
+  background-color: #6BB089;
+  font-size: 30px;
+  padding: 10px;
+  border: 2px solid;
+  border-radius: 20px;
 }

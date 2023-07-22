@@ -1,33 +1,8 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <title>Home Page</title>
-
-  <meta charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" />
-  <link rel="stylesheet" href="/styles/main.css" />
-  <link rel="stylesheet" href="/styles/layout.css" />
-
-  <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/app.js"></script>
-</head>
-
-<body>
-  <h1>Have fun! 🥔</h1>
-</body>
-
-=======
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <title>Home Page</title>
+  <title>Task Page</title>
 
   <meta charset="UTF-8" >
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
@@ -58,29 +33,34 @@
 </nav>
 
 <main>
-  <div>
-    Eat
-  </div>
-  <div>
-    Watch
-  </div>
-  <div>
-    Read
-  </div>
-  <div>
-    Buy
-  </div>
-  <div>
-    Do
-  </div>
-  <div>
-    Other
-  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Task</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Completed</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>Description</td>
+          <td>
+            <form method="POST" action="/">
+              <button type="submit">Delete</button>
+            </form>
+          </td>
+          <td>
+            <button type="submit"><a href="/">Edit</a></button>
+          </td>
+          <td>
+            <form method="POST" action="/"></form>
+            <input type="checkbox"><a href="/"></a></button>
+          </form>
+          </td>
+        </tr>
+    </tbody>
+  </table>
 </main>
 
-<footer>
-  Copyright
-</footer>
-
->>>>>>> 5ddd521 (add index.ejs, fix main.scss to align with register and login pages)
 </html>
