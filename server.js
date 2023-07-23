@@ -7,6 +7,7 @@ const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const cookieSession = require('cookie-session');
+const bodyParser = require('body-parser');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -14,7 +15,10 @@ const app = express();
 app.set('view engine', 'ejs');
 
 // helmet for security
-app.use(helmet());
+app.use(helmet({contentSecurityPolicy: false}));
+
+// parse application/json request bodies
+app.use(bodyParser.json());
 
 // Cookie Options
 app.use(cookieSession({
@@ -43,6 +47,8 @@ app.use(express.static('public'));
 // Note: Feel free to replace the example routes below with your own
 const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
+
+const chatRoutes = require('./routes/chat');
 const usersRoutes = require('./routes/users');
 
 // Mount all resource routes
@@ -50,7 +56,10 @@ const usersRoutes = require('./routes/users');
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
+
+app.use('/chat', chatRoutes);
 app.use('/users', usersRoutes);
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -72,6 +81,20 @@ app.get('/register', (req, res) => {
 app.get('/category', (req, res) => {
   res.render('category');
 });
+
+app.get('/chat', (req, res) => {
+  res.render('chat');
+});
+
+// Create a route for handling user requests to the chatbot
+app.post('/chat', (req, res) => {
+  const userMessage = req.body.message;
+  // Replace this with your OpenAI chatbot logic to generate a response
+  const chatbotReply = 'This is a sample chatbot reply';
+
+  res.json({ userMessage, chatbotReply });
+});
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

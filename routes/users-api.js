@@ -22,49 +22,49 @@ router.get('/', (req, res) => {
     });
 });
 
-router.post('/register', (req, res) => {
-  let usersArray = [];
+// router.post('/register', (req, res) => {
+//   let usersArray = [];
 
-  // grab all user emails
-  userQueries.getUsers()
-    .then(users => {
-      usersArray.push(users);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
+//   // grab all user emails
+//   userQueries.getUsers()
+//     .then(users => {
+//       usersArray.push(users);
+//     })
+//     .catch(err => {
+//       res
+//         .status(500)
+//         .json({ error: err.message });
+//     });
 
-  // check if email is already used
-  let userExists = 0;
+//   // check if email is already used
+//   let userExists = 0;
 
-  foreach(user in usersArray) {
-    if (user == req.body.email) {
-      userExists = 1;
-    }
-  }
+//   foreach(user in usersArray) {
+//     if (user == req.body.email) {
+//       userExists = 1;
+//     }
+//   }
 
-  if (userExists != 1) {
-    try {
-      const email = req.body.email
-      const name = req.body.name;
-      const salt = bcrypt.genSaltSync(3);
+//   if (userExists != 1) {
+//     try {
+//       const email = req.body.email
+//       const name = req.body.name;
+//       const salt = bcrypt.genSaltSync(3);
 
-      // use salt to hash password
-      const password = bcrypt.hashSync(req.body.password, salt);
+//       // use salt to hash password
+//       const password = bcrypt.hashSync(req.body.password, salt);
 
-      // insert into database
-      userQueries.insertUser(name, password, email);
-    }
-    catch (err) {
-      console.log(err);
-    }
+//       // insert into database
+//       userQueries.insertUser(name, password, email);
+//     }
+//     catch (err) {
+//       console.log(err);
+//     }
 
-  }
+//   }
 
 
 
-});
+// });
 
 module.exports = router;
