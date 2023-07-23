@@ -1,38 +1,50 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const chatContainer = document.getElementById('chat');
-  const userInputForm = document.getElementById('user-input');
-  const userInputField = document.getElementById('message');
+  const chatbox = document.getElementById('chatbox');
+  const chatForm = document.getElementById('chat-form');
+  const userInput = document.getElementById('user-input');
 
-  userInputForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const userMessage = userInputField.value.trim();
+  chatForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const userMessage = userInput.value.trim();
     if (userMessage !== '') {
       appendMessage('user', userMessage);
-      userInputField.value = '';
-
-      // Make an AJAX POST request to the backend
-      fetch('/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message: userMessage }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          const chatbotReply = data.chatbotReply;
-          appendMessage('chatbot', chatbotReply);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
+      userInput.value = '';
+      fetchChatbotReply(userMessage);
     }
   });
 
-  function appendMessage(sender, message) {
-    const messageElement = document.createElement('div');
-    messageElement.classList.add('message', sender);
-    messageElement.textContent = message;
-    chatContainer.appendChild(messageElement);
+  function appendMessage(role, message) {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add(role);
+    messageDiv.innerText = message;
+    chatbox.appendChild(messageDiv);
+  }
+
+  async function fetchChatbotReply(userMessage) {
+    try {
+      const response = await fetch('/api/openai', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ user: userMessage })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get response from the server.');
+      }
+
+      const data = await response.json();
+
+      console.log(data);
+
+      const chatbotReply = data.choices[0].message.content;
+
+      console.log(chatbotReply);
+
+      appendMessage('system', chatbotReply);
+    } catch (error) {
+      console.error(error);
+    }
   }
 });
