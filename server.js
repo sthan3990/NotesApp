@@ -7,7 +7,8 @@ const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const cookieSession = require('cookie-session');
-const bodyParser = require('body-parser');
+const axios = require('axios');
+
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -15,10 +16,8 @@ const app = express();
 app.set('view engine', 'ejs');
 
 // helmet for security
-app.use(helmet({contentSecurityPolicy: false}));
+app.use(helmet({ contentSecurityPolicy: false }));
 
-// parse application/json request bodies
-app.use(bodyParser.json());
 
 // Cookie Options
 app.use(cookieSession({
@@ -42,6 +41,9 @@ app.use(
   })
 );
 app.use(express.static('public'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -86,13 +88,38 @@ app.get('/chat', (req, res) => {
   res.render('chat');
 });
 
-// Create a route for handling user requests to the chatbot
-app.post('/chat', (req, res) => {
-  const userMessage = req.body.message;
-  // Replace this with your OpenAI chatbot logic to generate a response
-  const chatbotReply = 'This is a sample chatbot reply';
+app.post('/api/openai', async (req, res) => {
+  try {
+    const userMessage = req.body.user;
+    const response = await axios.post(
+      'https://api.openai.com/v1/chat/completions',
+      {
+        model: 'gpt-3.5-turbo',
+        messages: [
+          {
+            role: 'system',
+            content: "Hello! I'm your friendly librarian assistant here to help you. Please describe your task name, and will categorize it into one of the following categories: Buy(1), Watch(2), Read(3), or Production(4). If there's any ambiguity, I'll ask for clarification up to three times before making my best guess. Once the task fits into a single category, I must provide the task name plus a comma then the corresponding category number in a single line.",
+          },
+          {
+            role: 'user',
+            content: userMessage,
+          },
+        ],
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        },
+      }
+    );
+    res.json(response.data);
 
-  res.json({ userMessage, chatbotReply });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Something went wrong.' });
+  }
 });
 
 
