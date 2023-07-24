@@ -132,7 +132,12 @@ app.get('/profile', (req, res) => {
     let profileData = getuserProfile(req.session.user_id);
 
     let templateVars = {
-      user: { id: req.session.user_id, name: profileData }
+      user: {
+        id: req.session.user_id,
+        name: profileData.name,
+        email: profileData.email,
+        password: profileData.password
+      }
     };
 
     res.render('profile', templateVars);
