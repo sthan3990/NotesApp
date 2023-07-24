@@ -4,6 +4,4 @@ node_modules
 <<<<<<< HEAD
 =======
 node_modules
->>>>>>> 578b71b (Implemented database.js Adding queries for login, register, Also fixed)
-=======
->>>>>>> 359e39a (Created a new file under routes called auth.js which includes the code for register/login/logout. I also had to update some other files to make sure it works, those include server.js and package.json and a few other)
+.env
