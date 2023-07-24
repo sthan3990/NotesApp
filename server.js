@@ -10,6 +10,7 @@ const helmet = require('helmet');
 const cookieSession = require('cookie-session');
 const helmet = require('helmet');
 const { updateuserProfile } = require('./db/queries/profile');
+const bcrypt = require('bcrypt');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
