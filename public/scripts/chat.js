@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const chatbox = document.getElementById('chatbox');
-  const chatForm = document.getElementById('chat-form');
-  const userInput = document.getElementById('user-input');
+  const chatbox = document.getElementById('chatBox');
+  const chatForm = document.getElementById('chatForm');
+  const userInput = document.getElementById('userInput');
 
   chatForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(chatbotReply);
 
       appendMessage('system', chatbotReply);
+
     } catch (error) {
       console.error(error);
     }

@@ -88,11 +88,12 @@ app.get('/chat', (req, res) => {
   res.render('chat');
 });
 
+// In-memory conversation history
+const conversation = [];
+
 app.post('/api/openai', async (req, res) => {
   try {
-    const userMessage = req.body.user;
-
-    console.log(userMessage);
+    const userMessage =  req.body.user;
 
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions',
@@ -117,21 +118,19 @@ app.post('/api/openai', async (req, res) => {
       }
     );
 
-    // Handle BUY response
-    if (response.data.choices[0].message.role === 'system' && response.data.choices[0].message.content.includes('BUY')) {
-      // Implement your SQL query to insert into the BUY table here
-      // e.g., db.query('INSERT INTO BUY (message) VALUES (?)', responseData.choices[0].message.content);
-    }
+    // // Handle BUY response
+    // if (response.data.choices[0].message.role === 'system' && response.data.choices[0].message.content.includes('BUY')) {
+    //   // Implement your SQL query to insert into the BUY table here
+    //   // e.g., db.query('INSERT INTO BUY (message) VALUES (?)', responseData.choices[0].message.content);
+    // }
 
-    // Handle BUY response
-    if (response.data.choices[0].message.role === 'system' && response.data.choices[0].message.content.includes('WATCH')) {
-      // Implement your SQL query to insert into the BUY table here
-      // e.g., db.query('INSERT INTO BUY (message) VALUES (?)', responseData.choices[0].message.content);
-    }
+    // // Handle BUY response
+    // if (response.data.choices[0].message.role === 'system' && response.data.choices[0].message.content.includes('WATCH')) {
+    //   // Implement your SQL query to insert into the BUY table here
+    //   // e.g., db.query('INSERT INTO BUY (message) VALUES (?)', responseData.choices[0].message.content);
+    // }
 
-    const chatbotReply = response.data.choices[0].message.content;
-    res.json({ user: userMessage, chatbot: chatbotReply });
-
+    res.json(response.data);
 
   } catch (error) {
     console.error(error);
