@@ -2,8 +2,8 @@
 const db  = require('../db/connection');
 const bcrypt = require('bcrypt');
 
-//addItem inserts a newly added task to the database with its category
-const addTask = async function (obj) {
+//addItem inserts a newly added item to the database with its category
+const addItem = async function (obj) {
   const { items, item_id, category_id } = obj;
 
   const queryString = `
@@ -121,7 +121,7 @@ const addUser = async (obj) => {
 }
 
 module.exports = {
-  addTask,
+  addItem,
   checkAllEmails,
   getUserByEmail,
   getUserById,
