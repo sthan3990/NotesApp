@@ -8,6 +8,7 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const cookieSession = require('cookie-session');
 const axios = require('axios');
+const insertTask = require('./db/queries/tasks');
 
 
 const PORT = process.env.PORT || 8080;
@@ -93,7 +94,7 @@ const conversation = [];
 
 app.post('/api/openai', async (req, res) => {
   try {
-    const userMessage =  req.body.user;
+    const userMessage = req.body.user;
 
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions',
@@ -102,7 +103,7 @@ app.post('/api/openai', async (req, res) => {
         messages: [
           {
             role: 'system',
-            content: "Hello! I'm your friendly librarian assistant here to help you. Please describe your task name, and will categorize it into one of the following categories: Buy(1), Watch(2), Read(3), or Production(4). If there's any ambiguity, I'll ask for clarification up to three times before making my best guess. Once the task fits into a single category, I must provide the task name plus a comma then the corresponding category number in a single line.",
+            content: "Hello! I'm your friendly librarian assistant here to help you. Please describe your task name, and will categorize it into one of the following categories: Eat (1), Watch (2), Read (3), Buy (4), Do (5) and Other (6). If there's any ambiguity, I'll ask for clarification up to three times before making my best guess and choosing the Other category. Once the task fits into a single category, I will provide the task name a comma then the corresponding category number in a single line.",
           },
           {
             role: 'user',
@@ -118,19 +119,42 @@ app.post('/api/openai', async (req, res) => {
       }
     );
 
-    // // Handle BUY response
-    // if (response.data.choices[0].message.role === 'system' && response.data.choices[0].message.content.includes('BUY')) {
-    //   // Implement your SQL query to insert into the BUY table here
-    //   // e.g., db.query('INSERT INTO BUY (message) VALUES (?)', responseData.choices[0].message.content);
-    // }
-
-    // // Handle BUY response
-    // if (response.data.choices[0].message.role === 'system' && response.data.choices[0].message.content.includes('WATCH')) {
-    //   // Implement your SQL query to insert into the BUY table here
-    //   // e.g., db.query('INSERT INTO BUY (message) VALUES (?)', responseData.choices[0].message.content);
-    // }
-
     res.json(response.data);
+
+    // Handle EAT response
+    if (response.data.choices[0].message.role === 'system' && response.data.choices[0].message.content.includes('EAT')) {
+      insertTask("EAT", userMessage);
+    }
+
+    // Handle WATCH response
+    else if (response.data.choices[0].message.role === 'system' && response.data.choices[0].message.content.includes('WATCH')) {
+      insertTask("WATCH", userMessage);
+
+    }
+
+    // Handle READ response
+    else if (response.data.choices[0].message.role === 'system' && response.data.choices[0].message.content.includes('READ')) {
+      insertTask("READ", userMessage);
+
+    }
+
+    // Handle BUY response
+    else if (response.data.choices[0].message.role === 'system' && response.data.choices[0].message.content.includes('BUY')) {
+      insertTask("BUY", userMessage);
+
+    }
+
+    // Handle DO response
+    else if (response.data.choices[0].message.role === 'system' && response.data.choices[0].message.content.includes('DO')) {
+      insertTask("DO", userMessage);
+
+    }
+
+    // Handle OTHER  response
+    else if (response.data.choices[0].message.role === 'system' && response.data.choices[0].message.content.includes('OTHER')) {
+      insertTask("OTHER", userMessage);
+    }
+
 
   } catch (error) {
     console.error(error);
