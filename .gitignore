@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 node_modules
 .env
+=======
+node_modules
+>>>>>>> 578b71b (Implemented database.js Adding queries for login, register, Also fixed)

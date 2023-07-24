@@ -54,11 +54,8 @@ app.use(express.static('public'));
 const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
-<<<<<<< HEAD
-const registerRoutes = require('./routes/register');
-const loginRoutes = require('./routes/login');
-=======
 const authRoutes = require('./routes/auth');
+const profileRoutes = require('./routes/profile');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -66,7 +63,9 @@ const authRoutes = require('./routes/auth');
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
-app.use('/auth',authRoutes);
+app.use('/auth', authRoutes);
+app.use('/profile', profileRoutes);
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -118,8 +117,6 @@ app.post('/updateprofile', (req, res) => {
   } catch (err) {
     console.log(err);
   }
-});
-
 });
 
 app.get('/category', (req, res) => {

@@ -19,4 +19,8 @@ const insertUser = (name, password, email) => {
     });
 };
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 578b71b (Implemented database.js Adding queries for login, register, Also fixed)
 module.exports = { getUsers, insertUser};
