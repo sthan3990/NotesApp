@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
 {
   "name": "node-skeleton",
   "version": "1.0.0",
@@ -13,6 +16,44 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "chalk": "^2.4.2",
+    "cookie-session": "^2.0.0",
+    "dotenv": "^2.0.0",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "helmet": "^7.0.0",
+    "morgan": "^1.9.1",
+    "pg": "^8.5.0",
+    "sass": "^1.35.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.10"
+  }
+}
+=======
+>>>>>>> a1dadac (Created a new file under routes called auth.js which includes the code for register/login/logout. I also had to update some other files to make sure it works, those include server.js and package.json and a few other)
+{
+  "name": "node-skeleton",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "local": "./node_modules/.bin/nodemon -L --ignore public/",
+    "db:reset": "node bin/resetdb.js"
+  },
+  "author": "Lighthouse Labs",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    "bcrypt": "^5.1.0",
+=======
+>>>>>>> a1dadac (Created a new file under routes called auth.js which includes the code for register/login/logout. I also had to update some other files to make sure it works, those include server.js and package.json and a few other)
+>>>>>>> d8b790d (Created a new file under routes called auth.js which includes the code for register/login/logout. I also had to update some other files to make sure it works, those include server.js and package.json and a few other)
     "bluebird": "^3.7.2",
     "chalk": "^2.4.2",
     "cookie-session": "^2.0.0",
@@ -21,7 +62,10 @@
     "express": "^4.17.1",
     "helmet": "^7.0.0",
     "morgan": "^1.9.1",
+<<<<<<< HEAD
     "openai": "^3.3.0",
+=======
+>>>>>>> a1dadac (Created a new file under routes called auth.js which includes the code for register/login/logout. I also had to update some other files to make sure it works, those include server.js and package.json and a few other)
     "pg": "^8.5.0",
     "pg-promise": "^11.5.0",
     "sass": "^1.35.1"
@@ -30,3 +74,7 @@
     "nodemon": "^2.0.10"
   }
 }
+<<<<<<< HEAD
+=======
+>>>>>>> 359e39a (Created a new file under routes called auth.js which includes the code for register/login/logout. I also had to update some other files to make sure it works, those include server.js and package.json and a few other)
+>>>>>>> a1dadac (Created a new file under routes called auth.js which includes the code for register/login/logout. I also had to update some other files to make sure it works, those include server.js and package.json and a few other)

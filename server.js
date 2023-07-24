@@ -8,6 +8,7 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const cookieSession = require('cookie-session');
 const { updateuserProfile } = require('./db/queries/profile');
+const bcrypt = require('bcrypt');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -52,10 +53,17 @@ app.use(express.static('public'));
 const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
+<<<<<<< HEAD
 const authRoutes = require('./routes/auth');
 const profileRoutes = require('./routes/profile');
+=======
+<<<<<<< HEAD
+>>>>>>> a1dadac (Created a new file under routes called auth.js which includes the code for register/login/logout. I also had to update some other files to make sure it works, those include server.js and package.json and a few other)
 const registerRoutes = require('./routes/register');
 const loginRoutes = require('./routes/login');
+=======
+const authRoutes = require('./routes/auth');
+>>>>>>> 359e39a (Created a new file under routes called auth.js which includes the code for register/login/logout. I also had to update some other files to make sure it works, those include server.js and package.json and a few other)
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -63,11 +71,18 @@ const loginRoutes = require('./routes/login');
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
+<<<<<<< HEAD
 app.use('/auth', authRoutes);
 app.use('/profile', profileRoutes);
 
+=======
+<<<<<<< HEAD
+>>>>>>> a1dadac (Created a new file under routes called auth.js which includes the code for register/login/logout. I also had to update some other files to make sure it works, those include server.js and package.json and a few other)
 app.use('/register', registerRoutes());
 app.use('/login', loginRoutes());
+=======
+app.use('/auth',authRoutes);
+>>>>>>> 359e39a (Created a new file under routes called auth.js which includes the code for register/login/logout. I also had to update some other files to make sure it works, those include server.js and package.json and a few other)
 // Note: mount other resources here, using the same pattern above
 
 // Home page
