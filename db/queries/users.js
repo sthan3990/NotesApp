@@ -19,4 +19,5 @@ const insertUser = (name, password, email) => {
     });
 };
 
+
 module.exports = { getUsers, insertUser};
