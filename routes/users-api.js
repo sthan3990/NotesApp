@@ -1,5 +1,4 @@
 <<<<<<< HEAD
-=======
 <<<<<<< HEAD
 /*
  * All routes for User Data are defined here
@@ -26,7 +25,8 @@ router.get('/', (req, res) => {
 
 module.exports = router;
 =======
->>>>>>> 25ffd24 (Create Add User Feature)
+=======
+>>>>>>> 68e77f9 (Implemented database.js Adding queries for login, register, Also fixed)
 /*
  * All routes for User Data are defined here
  * Since this file is loaded in server.js into api/users,
@@ -98,6 +98,32 @@ router.post('/register', (req, res) => {
 
 module.exports = router;
 <<<<<<< HEAD
-=======
 >>>>>>> d2a91f8 (Create Add User Feature)
->>>>>>> 25ffd24 (Create Add User Feature)
+=======
+=======
+/*
+ * All routes for User Data are defined here
+ * Since this file is loaded in server.js into api/users,
+ *   these routes are mounted onto /api/users
+ * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
+ */
+
+const express = require('express');
+const router  = express.Router();
+const userQueries = require('../db/queries/users');
+
+router.get('/', (req, res) => {
+  userQueries.getUsers()
+    .then(users => {
+      res.json({ users });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
+module.exports = router;
+>>>>>>> 578b71b (Implemented database.js Adding queries for login, register, Also fixed)
+>>>>>>> 68e77f9 (Implemented database.js Adding queries for login, register, Also fixed)
