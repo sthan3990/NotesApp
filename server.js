@@ -5,12 +5,9 @@ require('dotenv').config();
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
-<<<<<<< HEAD
 const helmet = require('helmet');
 const cookieSession = require('cookie-session');
-const helmet = require('helmet');
 const { updateuserProfile } = require('./db/queries/profile');
-const bcrypt = require('bcrypt');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -113,10 +110,6 @@ app.post('/updateprofile', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    console.log(username);
-    console.log(email);
-    console.log(password);
-
     updateuserProfile(username, email, password);
 
     res.redirect('/');
@@ -131,7 +124,24 @@ app.get('/category', (req, res) => {
 });
 
 app.get('/profile', (req, res) => {
-  res.render('profile');
+
+  //to check if user is logged in
+  if (!req.session.user_id) {
+    res.render('../views/login');
+  } else {
+    let profileData = getuserProfile(req.session.user_id);
+
+    let templateVars = {
+      user: {
+        id: req.session.user_id,
+        name: profileData.name,
+        email: profileData.email,
+        password: profileData.password
+      }
+    };
+
+    res.render('profile', templateVars);
+  }
 });
 
 app.post('/updateprofile', (req, res) => {
@@ -154,13 +164,9 @@ app.post('/updateprofile', (req, res) => {
   }
 });
 
-
-
 app.get('/category', (req, res) => {
   res.render('category');
 });
-
-
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
