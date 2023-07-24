@@ -57,20 +57,27 @@
             <hr>
 
             <div class="form-group">
+              <label>User ID</label>
+              <input type="id" class="form-control" name="id"
+                value="<%= user.id %>" disabled>
+            </div>
+
+            <div class="form-group">
               <label>Email Address</label>
               <input type="email" class="form-control" name="email" placeholder="Enter Email"
-                value="<%= databaseEmail %>" required="required">
+                value="<%= user.email %>" required="required">
             </div>
+
             <div class="form-group">
               <label>Name</label>
-              <input type="name" class="form-control" name="name" placeholder="Enter Name" value="<%= databaseName %>"
+              <input type="name" class="form-control" name="name" placeholder="Enter Name" value="<%= user.name %>"
                 required="required">
             </div>
 
             <div class="form-group">
               <label>Password</label>
               <input type="password" class="form-control" name="password" placeholder="Enter Password"
-                value="<%= databasePassword %>" required="required">
+                value="<%= user.password %>" required="required">
             </div>
 
             <div class="form-group">
