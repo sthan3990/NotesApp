@@ -123,7 +123,39 @@ app.get('/category', (req, res) => {
   res.render('category');
 });
 
+app.get('/profile', (req, res) => {
 
+  //to check if user is logged in
+  if (!req.session.user_id) {
+    res.render('../views/login');
+  } else {
+    let profileData = getuserProfile(req.session.user_id);
+
+    let templateVars = {
+      user: { id: req.session.user_id, name: profileData }
+    };
+
+    res.render('profile', templateVars);
+  }
+});
+
+app.post('/updateprofile', (req, res) => {
+  try {
+    const username = req.body.username;
+    const email = req.body.email;
+    const password = bcrypt.hashSync(req.body.password, 10);
+
+    updateuserProfile(username, email, password);
+
+    res.redirect('/main');
+
+  } catch (err) {
+    res
+      .status(500)
+      .redirect('/login');
+  }
+
+});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
