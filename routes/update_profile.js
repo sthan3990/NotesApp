@@ -19,7 +19,7 @@ module.exports = (db) => {
     } else {
       let queryParams = [req.body.name, req.body.email];
       let queryString = `UPDATE users
-          SET name = $1, email = $3`
+          SET username = $1, email = $3`
 
       if (req.body.new_password) {
 

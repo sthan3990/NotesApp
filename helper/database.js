@@ -1,18 +1,18 @@
-// / helper functions where the database is involved
+//helper functions where the database is involved
 const db  = require('../db/connection');
 const bcrypt = require('bcrypt');
 
-// addTask inserts a newly added task to the database with its category
+//addItem inserts a newly added task to the database with its category
 const addTask = async function (obj) {
   const { items, item_id, category_id } = obj;
 
   const queryString = `
-  INSERT INTO tasks (input, item_id, category_id)
+  INSERT INTO items (item_name, item_id, category_id)
   VALUES ($1, $2, $3)
   RETURNING *;
   `;
 
-  const values = [task, item_id, category_id];
+  const values = [items, item_id, category_id];
 
   try {
     const res = await db.query(queryString, values);
@@ -79,7 +79,7 @@ const getUserById = async (id) => {
   }
 }
 
-const getTaskById = async (id) => {
+const getItemById = async (id) => {
   const queryString = `
     SELECT item_id, item_name, category_id
     FROM items
@@ -125,6 +125,6 @@ module.exports = {
   checkAllEmails,
   getUserByEmail,
   getUserById,
-  getTaskById,
+  getItemById,
   addUser
 };
