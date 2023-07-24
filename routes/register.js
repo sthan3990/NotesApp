@@ -1,12 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
+const { getUserByEmail, addUser } = require('../helper/database');
+// const bcrypt = require('bcrypt');
 
 
 module.exports = () => {
   // register GET
   router.get('/', (req, res) => {
-    res.redirect('/login');
+    let templateVars = {
+      user: {id: undefined, name: null}
+    };
+    res.render('register', templateVars);
   });
 
   // register POST

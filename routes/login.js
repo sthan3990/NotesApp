@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-
+const { getUserByEmail } = require('../helper/database');
 
 module.exports = () => {
 
@@ -31,7 +31,7 @@ module.exports = () => {
 
         } else {
           //check if the provided password matches the user's stored password
-          if (!bcrypt.compareSync(req.body.password, user.password)) {
+          if (req.body.password === user.password) {
             res.json({error: 'Password does not match'});
 
           } else {
