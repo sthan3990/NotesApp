@@ -45,5 +45,17 @@ const getuserProfile = (email) => {
     });
 };
 
-module.exports = { getuserProfile};
->>>>>>> 578b71b (Implemented database.js Adding queries for login, register, Also fixed)
+const updateuserProfile = (name, email, password) => {
+  return db.query(`UPDATE users SET name = $1, email = $2, password = $3
+       WHERE users.email = $2
+       RETURNING *;`, [name, email, password])
+    .then((result) => {
+      return result.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+
+module.exports = { getuserProfile, updateuserProfile};
