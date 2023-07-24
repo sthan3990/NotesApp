@@ -14,9 +14,13 @@
   "dependencies": {
     "bcrypt": "^5.1.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "bluebird": "^3.7.2",
 =======
 >>>>>>> d2a91f8 (Create Add User Feature)
+=======
+    "bluebird": "^3.7.2",
+>>>>>>> 359e39a (Created a new file under routes called auth.js which includes the code for register/login/logout. I also had to update some other files to make sure it works, those include server.js and package.json and a few other)
     "chalk": "^2.4.2",
     "cookie-session": "^2.0.0",
     "dotenv": "^2.0.0",
