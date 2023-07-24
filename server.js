@@ -12,6 +12,17 @@ const app = express();
 
 app.set('view engine', 'ejs');
 
+// helmet for security
+app.use(helmet());
+
+// Cookie Options
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2'],
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}));
+
+
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -53,6 +64,18 @@ app.use('/auth',authRoutes);
 
 app.get('/', (req, res) => {
   res.render('index');
+});
+
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
+app.get('/register', (req, res) => {
+  res.render('register');
+});
+
+app.get('/category', (req, res) => {
+  res.render('category');
 });
 
 app.listen(PORT, () => {
