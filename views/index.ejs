@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,5 +66,99 @@
     Other
   </div>
 </main>
+
+=======
+>>>>>>> ba418f2 (add index.ejs, fix main.scss to align with register and login pages)
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Home Page</title>
+
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script defer src="/scripts/app.js"></script>
+
+  <script src="https://kit.fontawesome.com/7d828f8d7a.js" crossorigin="anonymous"></script>
+
+</head>
+
+<%- include('partials/_header') %>
+
+<nav class="nav-area">
+    <a class="home" href="/">Home</a>
+    <a class="eat" href="/eat">Eat</a>
+    <a class="watch" href="/watch">Watch</a>
+    <a class="read" href="/read">Read</a>
+    <a class="buy" href="/buy">Buy</a>
+    <a class="do" href="/do">Do</a>
+    <a class="other" href="/other">Other</a>
+</nav>
+
+<section class="newtask">
+    <form class="taskform" method="POST" action="/tasks" id="taskform">
+    <label for="tasktext" class="tasktext">What task would you like to add today?</label>
+    <br>
+    <textarea name="taskarea" class="taskarea" id="taskarea"></textarea>
+    <div class="taskbutton">
+      <button type="submit" class="taskbutton">Add Task</button>
+    </div>
+  </form>
+</section>
+
+<section class="newtask">
+    <form class="taskform" method="POST" action="/tasks" id="taskform">
+    <label for="tasktext" class="tasktext">What task would you like to add today?</label>
+    <br>
+    <textarea name="taskarea" class="taskarea" id="taskarea"></textarea>
+    <div class="taskbutton">
+      <button type="submit" class="taskbutton">Add Task</button>
+    </div>
+  </form>
+</section>
+
+<section class="newtask">
+    <form class="taskform" method="POST" action="/tasks" id="taskform">
+    <label for="tasktext" class="tasktext">What task would you like to add today?</label>
+    <br>
+    <textarea name="taskarea" class="taskarea" id="taskarea"></textarea>
+    <div class="taskbutton">
+      <button type="submit" class="taskbutton">Add Task</button>
+    </div>
+  </form>
+</section>
+
+
+<main>
+  <div>
+    Eat
+  </div>
+  <div>
+    Watch
+  </div>
+  <div>
+    Read
+  </div>
+  <div>
+    Buy
+  </div>
+  <div>
+    Do
+  </div>
+  <div>
+    Other
+  </div>
+</main>
+<footer>
+  Copyright
+</footer>
 
 </html>

@@ -24,5 +24,4 @@ const updateuserProfile = (username, email, password) => {
     });
 };
 
-
 module.exports = { getuserProfile, updateuserProfile};
