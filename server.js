@@ -8,11 +8,8 @@ const morgan = require('morgan');
 <<<<<<< HEAD
 const helmet = require('helmet');
 const cookieSession = require('cookie-session');
-const { updateuserProfile, getuserProfile } = require('./db/queries/profile');
+const { updateuserProfile } = require('./db/queries/profile');
 const bcrypt = require('bcrypt');
-=======
-const cookieSession = require('cookie-session');
->>>>>>> 359e39a (Created a new file under routes called auth.js which includes the code for register/login/logout. I also had to update some other files to make sure it works, those include server.js and package.json and a few other)
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -62,7 +59,6 @@ const registerRoutes = require('./routes/register');
 const loginRoutes = require('./routes/login');
 =======
 const authRoutes = require('./routes/auth');
->>>>>>> 359e39a (Created a new file under routes called auth.js which includes the code for register/login/logout. I also had to update some other files to make sure it works, those include server.js and package.json and a few other)
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -70,12 +66,7 @@ const authRoutes = require('./routes/auth');
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
-<<<<<<< HEAD
-app.use('/register', registerRoutes());
-app.use('/login', loginRoutes());
-=======
 app.use('/auth',authRoutes);
->>>>>>> 359e39a (Created a new file under routes called auth.js which includes the code for register/login/logout. I also had to update some other files to make sure it works, those include server.js and package.json and a few other)
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -106,47 +97,36 @@ app.get('/register', (req, res) => {
 });
 
 app.get('/profile', (req, res) => {
-
-  //to check if user is logged in
-  if (!req.session.user_id) {
-    res.render('../views/login');
-  } else {
-    let profileData = getuserProfile(req.session.user_id);
-
-    let templateVars = {
-      user: {
-        id: req.session.user_id,
-        name: profileData.name,
-        email: profileData.email,
-        password: profileData.password
-      }
-    };
-
-    res.render('profile', templateVars);
-  }
+  res.render('profile');
 });
 
 app.post('/updateprofile', (req, res) => {
+
   try {
     const username = req.body.username;
     const email = req.body.email;
-    const password = bcrypt.hashSync(req.body.password, 10);
+    const password = req.body.password;
+
+    console.log(username);
+    console.log(email);
+    console.log(password);
 
     updateuserProfile(username, email, password);
 
-    res.redirect('/main');
+    res.redirect('/');
 
   } catch (err) {
-    res
-      .status(500)
-      .redirect('/login');
+    console.log(err);
   }
+});
 
 });
 
 app.get('/category', (req, res) => {
   res.render('category');
 });
+
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
