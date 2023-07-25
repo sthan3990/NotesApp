@@ -5,10 +5,10 @@ require('dotenv').config();
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
-const helmet = require('helmet');
 const cookieSession = require('cookie-session');
 const { updateuserProfile } = require('./db/queries/profile');
 const bcrypt = require('bcrypt');
+const helmet = require('helmet');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -65,6 +65,8 @@ app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
 app.use('/auth',authRoutes);
+app.use('/profile', profileRoutes);
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -117,6 +119,7 @@ app.post('/updateprofile', (req, res) => {
 app.get('/category', (req, res) => {
   res.render('category');
 });
+
 app.get('/profile', (req, res) => {
   res.render('profile');
 });
@@ -127,7 +130,6 @@ app.post('/updateprofile', (req, res) => {
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
-
 
     updateuserProfile(username, email, password);
 
@@ -141,7 +143,6 @@ app.post('/updateprofile', (req, res) => {
 app.get('/category', (req, res) => {
   res.render('category');
 });
-
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

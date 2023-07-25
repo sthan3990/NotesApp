@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 header {
   height: 120px;
   background: #cbe1e3;
@@ -35,6 +34,85 @@ nav {
   width: 200px;
   display: flex;
   flex-direction: column;
+  top: 120px;
+  height: 85%;
+}
+
+.nav-area a {
+  font-size: 40px;
+  color: #e3e7eef5;
+  text-decoration: none;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.nav-area a:hover {
+  color: #040608f5;
+}
+
+.home {
+  background: #899FCF;
+  flex: 1;
+}
+
+
+.eat {
+  background: #768CC4;
+  flex: 1;
+}
+
+.watch {
+  background: #6279B8;
+  flex: 1;
+}
+
+.read {
+  background: #49516F;
+  flex: 1;
+}
+
+.buy {
+  background: #496F5D;
+  flex: 1;
+}
+
+.do {
+  background: #4C9F70;
+  flex: 1;
+}
+
+.other {
+  background: #6BB089;
+  flex: 1;
+}
+
+main {
+  padding-top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: rgb(158, 205, 215);
+  margin-left: 200px;
+}
+
+main > div {
+  background-color: #f1f1f1;
+  width: 500px;
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-bottom: 100px;
+  text-align: center;
+  line-height: 500px;
+  font-size: 30px;
+}
+
+.newtask {
+  padding-top: 200px;
+  margin-left: 200px;
+  display: flex;
+  justify-content: center;
+  display: flex;
+  flex-direction: column; 
   top: 120px;
   height: 85%;
 }
@@ -147,10 +225,6 @@ table, th, td {
 th, td {
   padding: 30px;
   font-size: 25px;
-}
-
-td a {
-  text-decoration: none;
 }
 
 th {
