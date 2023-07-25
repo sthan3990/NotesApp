@@ -1,8 +1,7 @@
--- Users table seeds here (Example)
--- Password is p@ssw0rd (bcrypt encrypted hash)
+INSERT INTO users (username, password, email) 
+VALUES 
+('user1', 'password1', 'user1@example.com'),
+('user2', 'password2', 'user2@example.com'),
+('user3', 'password3', 'user3@example.com'),
+('user4', 'password4', 'user4@example.com');
 
-INSERT INTO users (id, username, password, email)
-VALUES ('1', 'Alice', '$2a$12$S6dUOM7SiIwxiwYVL.epB.yAtKd3HobbB77iK56IATMjmFieq75h2', 'example@gmail.com');
-
-INSERT INTO users (id, username, password, email)
-VALUES ('1', 'Bob', '$2a$12$S6dUOM7SiIwxiwYVL.epB.yAtKd3HobbB77iK56IATMjmFieq75h2', 'example2@gmail.com');

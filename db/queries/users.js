@@ -7,8 +7,6 @@ const getUsers = () => {
     });
 };
 
-
-
 const insertUser = (name, password, email) => {
   return db.query(`INSERT INTO users (name, password, email)
        VALUES ($1, $2, $3)
@@ -20,6 +18,5 @@ const insertUser = (name, password, email) => {
       console.log(err.message);
     });
 };
-
 
 module.exports = { getUsers, insertUser, getuserProfile};
