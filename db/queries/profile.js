@@ -34,9 +34,14 @@ module.exports = { getuserProfile, updateuserProfile};
 =======
 const db = require('../connection');
 const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 
 const getuserProfile = (email) => {
+<<<<<<< HEAD
+  return db.query(`SELECT * FROM users WHERE email = $1;`, [email])
+=======
   return db.query(`SELECT * FROM users WHERE email = $1`, [email])
+>>>>>>> 2ad0781 (Create Update Profile Feature)
     .then((result) => {
       return result.rows[0];
     })

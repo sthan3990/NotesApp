@@ -53,17 +53,11 @@ app.use(express.static('public'));
 const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
-<<<<<<< HEAD
 const authRoutes = require('./routes/auth');
 const profileRoutes = require('./routes/profile');
-=======
-<<<<<<< HEAD
->>>>>>> a1dadac (Created a new file under routes called auth.js which includes the code for register/login/logout. I also had to update some other files to make sure it works, those include server.js and package.json and a few other)
 const registerRoutes = require('./routes/register');
 const loginRoutes = require('./routes/login');
-=======
 const authRoutes = require('./routes/auth');
->>>>>>> 359e39a (Created a new file under routes called auth.js which includes the code for register/login/logout. I also had to update some other files to make sure it works, those include server.js and package.json and a few other)
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -71,18 +65,9 @@ const authRoutes = require('./routes/auth');
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
-<<<<<<< HEAD
-app.use('/auth', authRoutes);
-app.use('/profile', profileRoutes);
-
-=======
-<<<<<<< HEAD
->>>>>>> a1dadac (Created a new file under routes called auth.js which includes the code for register/login/logout. I also had to update some other files to make sure it works, those include server.js and package.json and a few other)
 app.use('/register', registerRoutes());
 app.use('/login', loginRoutes());
-=======
 app.use('/auth',authRoutes);
->>>>>>> 359e39a (Created a new file under routes called auth.js which includes the code for register/login/logout. I also had to update some other files to make sure it works, those include server.js and package.json and a few other)
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -109,13 +94,11 @@ app.get('/register', (req, res) => {
   let templateVars = {
     user: {id: undefined, name: null}
   };
-
   res.render('register', templateVars);
 });
 
 app.get('/profile', (req, res) => {
   res.render('profile');
-
 });
 
 app.post('/updateprofile', (req, res) => {
@@ -137,26 +120,8 @@ app.post('/updateprofile', (req, res) => {
 app.get('/category', (req, res) => {
   res.render('category');
 });
-
 app.get('/profile', (req, res) => {
-
-  //to check if user is logged in
-  if (!req.session.user_id) {
-    res.render('../views/login');
-  } else {
-    let profileData = getuserProfile(req.session.user_id);
-
-    let templateVars = {
-      user: {
-        id: req.session.user_id,
-        name: profileData.name,
-        email: profileData.email,
-        password: profileData.password
-      }
-    };
-
-    res.render('profile', templateVars);
-  }
+  res.render('profile');
 });
 
 app.post('/updateprofile', (req, res) => {
@@ -166,9 +131,6 @@ app.post('/updateprofile', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    console.log(username);
-    console.log(email);
-    console.log(password);
 
     updateuserProfile(username, email, password);
 
@@ -179,13 +141,13 @@ app.post('/updateprofile', (req, res) => {
   }
 });
 
+});
+
 app.get('/category', (req, res) => {
   res.render('category');
 });
 
 
-=======
->>>>>>> 416a0f9 (add temp route for viewing category page)
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
