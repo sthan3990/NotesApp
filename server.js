@@ -6,6 +6,8 @@ const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
 const cookieSession = require('cookie-session');
+const helmet = require('helmet');
+const { updateuserProfile } = require('./db/queries/profile');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -48,6 +50,7 @@ const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
 const authRoutes = require('./routes/auth');
+const profileRoutes = require('./routes/profile');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -55,7 +58,9 @@ const authRoutes = require('./routes/auth');
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
-app.use('/auth',authRoutes);
+app.use('/auth', authRoutes);
+app.use('/profile', profileRoutes);
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -74,9 +79,35 @@ app.get('/register', (req, res) => {
   res.render('register');
 });
 
+app.get('/profile', (req, res) => {
+  res.render('profile');
+});
+
+app.post('/updateprofile', (req, res) => {
+
+  try {
+    const username = req.body.username;
+    const email = req.body.email;
+    const password = req.body.password;
+
+    console.log(username);
+    console.log(email);
+    console.log(password);
+
+    updateuserProfile(username, email, password);
+
+    res.redirect('/');
+
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 app.get('/category', (req, res) => {
   res.render('category');
 });
+
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
