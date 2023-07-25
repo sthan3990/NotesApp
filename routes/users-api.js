@@ -39,17 +39,17 @@ router.post('/register', (req, res) => {
   // check if email is already used
   let userExists = 0;
 
-  foreach(user in usersArray) {
-    if (user == req.body.email) {
+  for (let user in usersArray) {
+    if (user === req.body.email) {
       userExists = 1;
     }
   }
 
-  if (userExists != 1) {
+  if (userExists !== 1) {
     try {
-      const email = req.body.email
+      const email = req.body.email;
       const name = req.body.name;
-      const salt = bcrypt.genSaltSync(3);
+      const salt = bcrypt.genSaltSync(10);
 
       // use salt to hash password
       const password = bcrypt.hashSync(req.body.password, salt);
