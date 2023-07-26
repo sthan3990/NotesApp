@@ -6,9 +6,12 @@ const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
 const cookieSession = require('cookie-session');
+const helmet = require('helmet');
 const axios = require('axios');
+
+// User Made Functions
 const insertTask = require('./db/queries/tasks');
-const updateuserProfile = require('/.db/queries/profile');
+const {updateuserProfile} = require('./db/queries/profile');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -19,7 +22,7 @@ db.connect();
 app.set('view engine', 'ejs');
 
 // helmet for security
-app.use(helmet({ contentSecurityPolicy: false }));
+app.use(helmet());
 
 
 // Cookie Options
