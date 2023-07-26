@@ -35,4 +35,20 @@ router.get('/', (req, res) => {
     });
 });
 
+router.post('/updateprofile', (req, res) => {
+
+  try {
+    const username = req.body.username;
+    const email = req.body.email;
+    const password = req.body.password;
+
+    profileQueries.updateuserProfile(username, email, password);
+
+    res.redirect('/');
+
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 module.exports = router;
