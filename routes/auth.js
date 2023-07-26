@@ -1,10 +1,10 @@
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 const bcrypt = require("bcrypt");
 const promise = require('bluebird');
 
 const initOptions = {
-    promiseLib: promise
+  promiseLib: promise
 };
 
 const db = require('../db/connection');
@@ -22,7 +22,7 @@ router.get("/register", (req, res) => {
 // Creating a new user
 router.post("/register", (req, res) => {
   const email = req.query.email;
-  console.log(email,req.query.password);
+  console.log(email, req.query.password);
   const password = bcrypt.hashSync(req.query.password, 10);
   if (!email || !password) {
     res.status(400).send("Please provide both a valid email and password");
