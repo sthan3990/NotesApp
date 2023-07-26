@@ -54,7 +54,6 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const userApiRoutes = require('./routes/users-api');
@@ -143,9 +142,6 @@ app.get('/category', (req, res) => {
 app.get('/chat', (req, res) => {
   res.render('chat');
 });
-
-// In-memory conversation history
-const conversation = [];
 
 app.post('/api/openai', async (req, res) => {
   try {

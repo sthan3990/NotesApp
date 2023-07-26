@@ -20,8 +20,7 @@ module.exports = () => {
   });
 
   //for logging in
-
-  router.post('/', async (req, res) => {
+  router.post('/login', async (req, res) => {
     getUserByEmail(req.body.email)
       .then(user => {
         //check if the user exists
