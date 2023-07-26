@@ -8,7 +8,7 @@ const morgan = require('morgan');
 const cookieSession = require('cookie-session');
 const axios = require('axios');
 const insertTask = require('./db/queries/tasks');
-
+const updateuserProfile = require('/.db/queries/profile');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -131,22 +131,6 @@ app.get('/category', (req, res) => {
 
 app.get('/profile', (req, res) => {
   res.render('profile');
-});
-
-app.post('/updateprofile', (req, res) => {
-
-  try {
-    const username = req.body.username;
-    const email = req.body.email;
-    const password = req.body.password;
-
-    updateuserProfile(username, email, password);
-
-    res.redirect('/');
-
-  } catch (err) {
-    console.log(err);
-  }
 });
 
 app.get('/category', (req, res) => {
