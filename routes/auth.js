@@ -2,9 +2,11 @@ const express = require('express');
 const router  = express.Router();
 const bcrypt = require("bcrypt");
 const promise = require('bluebird');
+
 const initOptions = {
     promiseLib: promise
 };
+
 const db = require('../db/connection');
 
 // Helper function to generate random string
@@ -63,7 +65,7 @@ router.post("/login", (req, res) => {
     .then(results => {
       if (results.rows.length <= 0) {
         return res.status(400).send("Email account does not exist");
-      } 
+      }
       const user = results.rows[0]
       // Check to see if the user exists and if the password matches
       if (!user || !bcrypt.compareSync(password, user.password)) {
