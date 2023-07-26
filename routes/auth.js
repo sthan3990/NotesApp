@@ -1,10 +1,12 @@
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 const bcrypt = require("bcrypt");
 const promise = require('bluebird');
+
 const initOptions = {
-    promiseLib: promise
+  promiseLib: promise
 };
+
 const db = require('../db/connection');
 
 // Helper function to generate random string
@@ -20,7 +22,7 @@ router.get("/register", (req, res) => {
 // Creating a new user
 router.post("/register", (req, res) => {
   const email = req.query.email;
-  console.log(email,req.query.password);
+  console.log(email, req.query.password);
   const password = bcrypt.hashSync(req.query.password, 10);
   if (!email || !password) {
     res.status(400).send("Please provide both a valid email and password");
@@ -63,7 +65,7 @@ router.post("/login", (req, res) => {
     .then(results => {
       if (results.rows.length <= 0) {
         return res.status(400).send("Email account does not exist");
-      } 
+      }
       const user = results.rows[0]
       // Check to see if the user exists and if the password matches
       if (!user || !bcrypt.compareSync(password, user.password)) {
