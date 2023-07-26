@@ -5,7 +5,6 @@ require('dotenv').config();
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
-const helmet = require('helmet');
 const cookieSession = require('cookie-session');
 const axios = require('axios');
 const insertTask = require('./db/queries/tasks');
@@ -13,6 +12,9 @@ const insertTask = require('./db/queries/tasks');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
+
+const db  = require('./db/connection');
+db.connect();
 
 app.set('view engine', 'ejs');
 
@@ -33,6 +35,10 @@ app.use(cookieSession({
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}));
 app.use(
   '/styles',
   sassMiddleware({
@@ -53,6 +59,10 @@ const widgetApiRoutes = require('./routes/widgets-api');
 
 const chatRoutes = require('./routes/chat');
 const usersRoutes = require('./routes/users');
+const authRoutes = require('./routes/auth');
+const profileRoutes = require('./routes/profile');
+const registerRoutes = require('./routes/register');
+const loginRoutes = require('./routes/login');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -62,6 +72,9 @@ app.use('/api/widgets', widgetApiRoutes);
 
 app.use('/chat', chatRoutes);
 app.use('/users', usersRoutes);
+
+app.use('/auth',authRoutes);
+app.use('/profile', profileRoutes);
 
 // Note: mount other resources here, using the same pattern above
 
@@ -74,11 +87,66 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.render('login');
+  if (req.session.user_id) {
+    res.redirect('/items');
+
+  } else {
+    let templateVars = {
+      user: {id: undefined, name: null}
+    };
+    res.render('login', templateVars);
+  }
 });
 
 app.get('/register', (req, res) => {
-  res.render('register');
+  let templateVars = {
+    user: {id: undefined, name: null}
+  };
+  res.render('register', templateVars);
+});
+
+app.get('/profile', (req, res) => {
+  res.render('profile');
+});
+
+app.post('/updateprofile', (req, res) => {
+
+  try {
+    const username = req.body.username;
+    const email = req.body.email;
+    const password = req.body.password;
+
+    updateuserProfile(username, email, password);
+
+    res.redirect('/');
+
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.get('/category', (req, res) => {
+  res.render('category');
+});
+
+app.get('/profile', (req, res) => {
+  res.render('profile');
+});
+
+app.post('/updateprofile', (req, res) => {
+
+  try {
+    const username = req.body.username;
+    const email = req.body.email;
+    const password = req.body.password;
+
+    updateuserProfile(username, email, password);
+
+    res.redirect('/');
+
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 app.get('/category', (req, res) => {

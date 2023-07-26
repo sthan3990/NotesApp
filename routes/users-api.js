@@ -1,3 +1,4 @@
+
 /*
  * All routes for User Data are defined here
  * Since this file is loaded in server.js into api/users,
@@ -50,6 +51,17 @@ router.get('/', (req, res) => {
 //       const email = req.body.email
 //       const name = req.body.name;
 //       const salt = bcrypt.genSaltSync(3);
+  //  for (let user in usersArray) {
+  //   if (user === req.body.email) {
+  //     userExists = 1;
+  //   }
+  // }
+
+  // if (userExists !== 1) {
+  //   try {
+  //     const email = req.body.email;
+  //     const name = req.body.name;
+  //     const salt = bcrypt.genSaltSync(10);
 
 //       // use salt to hash password
 //       const password = bcrypt.hashSync(req.body.password, salt);

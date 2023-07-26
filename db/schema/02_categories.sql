@@ -1,6 +1,5 @@
 DROP TABLE IF EXISTS categories CASCADE;
-
 CREATE TABLE categories (
     id SERIAL NOT NULL PRIMARY KEY,
-    name VARCHAR(50) NOT NULL
+    name VARCHAR(255) NOT NULL
 );
