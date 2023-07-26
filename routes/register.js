@@ -3,7 +3,6 @@ const router = express.Router();
 const { getUserByEmail, addUser } = require('../helper/database');
 // const bcrypt = require('bcrypt');
 
-
 module.exports = () => {
   // register GET
   router.get('/', (req, res) => {
