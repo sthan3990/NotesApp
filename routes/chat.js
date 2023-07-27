@@ -8,7 +8,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const {insertTask} = require('../db/queries/tasks');
+const { insertTask } = require('../db/queries/tasks');
 
 router.get('/', (req, res) => {
   res.render('chat');
@@ -46,41 +46,42 @@ router.post('/', async (req, res) => {
     const messageArray = JSON.stringify(response.data.choices[0].message.content).split("//");
 
     // required parameters
-    let taskName = messageArray[0].substring(1,messageArray[0].length).trim();
+    let taskName = messageArray[0].substring(1, messageArray[0].length).trim();
     let categoryID = messageArray[1].trim();
-    let categoryName = messageArray[2].substring(0,messageArray[2].length - 1).trim();
+    let categoryName = messageArray[2].substring(0, messageArray[2].length - 1).trim();
     let theDate = new Date();
     theDate.getUTCDate();
 
     // Handle EAT response
-    if (taskName.length > 0 && categoryID === "1" && categoryName.includes("Eat")) {
-      insertTask(taskName, categoryID, userID, "FALSE", theDate);
-    }
+    if (taskName.length > 0) {
+      if (categoryID === "1" && categoryName.includes("Eat")) {
+        insertTask(taskName, categoryID, userID, categoryName);
+      }
 
-    // Handle WATCH response
-    else if (taskName.length > 0 && categoryID === "2" && categoryName.includes("Watch")) {
-      insertTask(taskName, categoryID, userID, "FALSE", theDate);
-    }
+      // Handle WATCH response
+      else if (categoryID === "2" && categoryName.includes("Watch")) {
+        insertTask(taskName, categoryID, userID, categoryName);
+      }
 
-    // Handle READ response
-    else if (taskName.length > 0 && categoryID === "3" && categoryName.includes("Read")) {
-      insertTask(taskName, categoryID, userID, "FALSE", theDate);
-    }
+      // Handle READ response
+      else if (categoryID === "3" && categoryName.includes("Read")) {
+        insertTask(taskName, categoryID, userID, "FALSE", categoryName);
+      }
 
-    // Handle BUY response
-    else if (taskName.length > 0 && categoryID === "4" && categoryName.includes("Buy")) {
-      insertTask(taskName, categoryID, userID, "FALSE", theDate);
+      // Handle BUY response
+      else if (categoryID === "4" && categoryName.includes("Buy")) {
+        insertTask(taskName, categoryID, userID, "FALSE", categoryName);
+      }
 
-    }
+      // Handle DO response
+      else if (categoryID === "5" && categoryName.includes("Do")) {
+        insertTask(taskName, categoryID, userID, categoryName);
+      }
 
-    // Handle DO response
-    else if (taskName.length > 0 && categoryID === "5" && categoryName.includes("Do")) {
-      insertTask(taskName, categoryID, userID, "FALSE",theDate);
-    }
-
-    // Handle OTHER  response
-    else if (taskName.length > 0 && categoryID === "6" && categoryName.includes("Other")) {
-      insertTask(taskName, categoryID, userID, "FALSE",theDate);
+      // Handle OTHER  response
+      else if (categoryID === "6" && categoryName.includes("Other")) {
+        insertTask(taskName, categoryID, userID, categoryName);
+      }
     }
 
     res.json(response.data);
