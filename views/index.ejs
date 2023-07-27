@@ -20,7 +20,11 @@
 
 </head>
 
-<%- include('partials/_header') %>
+<% if(!allTasks) { %>
+  <%- include('partials/_header') %>
+<% } else { %>
+  <%- include('partials/_headerLoggedin') %>
+<% } %>
 
   <nav class="nav-area">
     <a class="home" href="/">Home</a>
