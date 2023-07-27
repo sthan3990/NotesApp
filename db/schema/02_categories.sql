@@ -1,4 +1,6 @@
-CREATE TABLE Categories (
-    category_id SERIAL PRIMARY KEY,
-    category_name VARCHAR(50) NOT NULL
+DROP TABLE IF EXISTS categories CASCADE;
+
+CREATE TABLE categories (
+    id SERIAL NOT NULL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL
 );
