@@ -24,16 +24,17 @@
 
 <nav class="nav-area">
     <a class="home" href="/">Home</a>
-    <a class="eat" href="/eat">Eat</a>
-    <a class="watch" href="/watch">Watch</a>
-    <a class="read" href="/read">Read</a>
-    <a class="buy" href="/buy">Buy</a>
-    <a class="do" href="/do">Do</a>
-    <a class="other" href="/other">Other</a>
+    <a class="eat" href="/tasks/1">Eat</a>
+    <a class="watch" href="/tasks/2">Watch</a>
+    <a class="read" href="/tasks/3">Read</a>
+    <a class="buy" href="/tasks/4">Buy</a>
+    <a class="do" href="/tasks/5">Do</a>
+    <a class="other" href="/tasks/6">Other</a>
 </nav>
 
 <main>
   <table class="table">
+    <caption><%= categoryName %></caption>
     <thead>
       <tr>
         <th scope="col">Task</th>
@@ -43,23 +44,26 @@
       </tr>
     </thead>
     <tbody>
+      <% for (let id in tasks) { %>
         <tr>
-          <td>Description</td>
-          <td>
-            <form method="POST" action="/">
-              <button type="submit">Delete</button>
-            </form>
+          <td><%= tasks[id].name %></td>
+          <td><form method="POST" action="/tasks/<%= tasks[id].c_id %>/<%= tasks[id].t_id %>/delete">
+            <button type="submit">Delete</button>
+          </form>
           </td>
           <td>
-            <button type="submit"><a href="/">Edit</a></button>
+            <button type="submit"><a href="/tasks/edit/<%= tasks[id].c_id %>/<%= tasks[id].t_id %>">Edit</a></button>
           </td>
           <td>
-            <form method="POST" action="/"></form>
-            <input type="checkbox"><a href="/"></a></button>
+            <form method="POST" action="/tasks/<%= tasks[id].c_id %>/<%= tasks[id].t_id %>/complete"></form>
+            <input type="checkbox">
           </form>
           </td>
         </tr>
+      <% } %>
     </tbody>
+
+
   </table>
 </main>
 

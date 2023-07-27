@@ -24,12 +24,12 @@
 
 <nav class="nav-area">
     <a class="home" href="/">Home</a>
-    <a class="eat" href="/eat">Eat</a>
-    <a class="watch" href="/watch">Watch</a>
-    <a class="read" href="/read">Read</a>
-    <a class="buy" href="/buy">Buy</a>
-    <a class="do" href="/do">Do</a>
-    <a class="other" href="/other">Other</a>
+    <a class="eat" href="/tasks/1">Eat</a>
+    <a class="watch" href="/tasks/2">Watch</a>
+    <a class="read" href="/tasks/3">Read</a>
+    <a class="buy" href="/tasks/4">Buy</a>
+    <a class="do" href="/tasks/5">Do</a>
+    <a class="other" href="/tasks/6">Other</a>
 </nav>
 
 <section class="newtask">
@@ -45,22 +45,11 @@
 
 <main>
   <div>
-    Eat
-  </div>
-  <div>
-    Watch
-  </div>
-  <div>
-    Read
-  </div>
-  <div>
-    Buy
-  </div>
-  <div>
-    Do
-  </div>
-  <div>
-    Other
+    <% for (let row in allTasks) { %>
+      <ul><%= allTasks[row].cat_name %></ul>
+      <li><%= allTasks[row].name %></li>
+      <hr>
+      <% } %>
   </div>
 </main>
 

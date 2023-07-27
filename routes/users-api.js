@@ -37,13 +37,13 @@ router.post('/register', (req, res) => {
     });
 
   // check if email is already used
-  let userExists = 0;
+  // let userExists = 0;
 
-  foreach(user in usersArray) {
-    if (user == req.body.email) {
-      userExists = 1;
-    }
-  }
+  // foreach(user in usersArray) {
+  //   if (user == req.body.email) {
+  //     userExists = 1;
+  //   }
+  // }
 
   if (userExists != 1) {
     try {
