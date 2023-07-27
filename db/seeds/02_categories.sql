@@ -1,7 +1,5 @@
-INSERT INTO categories (name) VALUES
-('Eat'),
-('Watch'),
-('Read'),
-('Buy'),
-('Do'),
-('Other');
+INSERT INTO Categories (category_name) VALUES 
+('Film / Series (To watch)'),
+('Restaurants, cafes, etc. (To eat)'),
+('Books (To read)'),
+('Products (To buy)');
