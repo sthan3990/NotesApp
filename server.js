@@ -67,8 +67,6 @@ const authRoutes = require("./routes/auth");
 const profileRoutes = require("./routes/profile");
 const tasksRoutes = require("./routes/tasks");
 
-const { updateuserProfile } = require("./db/queries/profile");
-
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
@@ -85,6 +83,8 @@ app.use("/api/openai", chatRoutes);
 
 app.use("/tasks", tasksRoutes);
 
+app.use("/login", authRoutes);
+
 // Note: mount other resources here, using the same pattern above
 
 //const taskQueries = require("./db/queries/tasks");
@@ -93,10 +93,14 @@ app.use("/tasks", tasksRoutes);
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-//Login
-app.get("/login", (req, res) => {
-  res.render("login", { user: req.user || {} });
+app.get("/", (req, res) => {
+  res.render("login");
 });
+
+//Login
+// app.get("/login", (req, res) => {
+//   res.render("login", { user: req.user || {} });
+// });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

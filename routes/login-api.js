@@ -10,7 +10,7 @@ const router = express.Router();
 const loginQueries = require('../db/queries/login');
 const bcrypt = require("bcrypt");
 
-router.post('/login', (req, res) => {
+router.post('/', (req, res) => {
 
   const enteredEmail = req.params.enteredEmail;
   const enteredPassword = req.params.enteredPassword;
