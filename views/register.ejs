@@ -59,6 +59,33 @@
       </div>
     </div>
 
+    <script>
+      document.getElementById('register').addEventListener('submit', function(event) {
+        event.preventDefault();
+  
+        var emailInput = document.querySelector('input[name="email"]');
+        var passwordInput = document.querySelector('input[name="password"]');
+        var email = emailInput.value;
+        var password = passwordInput.value;
+  
+        fetch('/auth/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email: email, password: password })
+        }).then(function(response) {
+          if(response.ok) {
+            console.log("Registration successful!");
+          } else {
+            console.log("Registration failed!");
+          }
+        }).catch(function(error) {
+          console.error('Error:', error);
+        });
+      });
+    </script>
+
 </body>
 
 

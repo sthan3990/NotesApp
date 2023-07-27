@@ -7,13 +7,19 @@ const express = require('express');
 const morgan = require('morgan');
 const cookieSession = require('cookie-session');
 const helmet = require('helmet');
+const path = require('path');
 
 // User Made Functions
 
 const PORT = process.env.PORT || 8080;
 const app = express();
 
+//Setting up EJS and views 
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views')); 
+
+//Getting the static files
+app.use(express.static(path.join(__dirname, 'public'))); // replace 'public' with the path to your static files directory
 
 // helmet for security
 app.use(helmet());
@@ -56,8 +62,7 @@ const chatRoutes = require('./routes/chat');
 const usersRoutes = require('./routes/users');
 const authRoutes = require('./routes/auth');
 const profileRoutes = require('./routes/profile');
-const registerRoutes = require('./routes/register');
-const loginRoutes = require('./routes/login');
+
 
 const { updateuserProfile } = require('./db/queries/profile');
 
@@ -70,11 +75,8 @@ app.use('/api/widgets', widgetApiRoutes);
 app.use('/chat', chatRoutes);
 app.use('/users', usersRoutes);
 
-app.use('/auth',authRoutes);
+app.use('/',authRoutes)
 app.use('/profile', profileRoutes);
-
-app.use('/login',loginRoutes);
-app.use('/register', registerRoutes);
 
 app.use('/api/openai', chatRoutes);
 
@@ -86,6 +88,11 @@ app.use('/api/openai', chatRoutes);
 
 app.get('/', (req, res) => {
   res.render('index');
+});
+
+//Login 
+app.get('/login', (req, res) => {
+  res.render('login', { user: req.user || {} });
 });
 
 

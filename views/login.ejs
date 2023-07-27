@@ -54,5 +54,33 @@
       </form>
     </div>
   </div>
+  <script>
+    document.getElementById('login').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      var emailInput = document.querySelector('input[name="email"]');
+      var passwordInput = document.querySelector('input[name="password"]');
+      var email = emailInput.value;
+      var password = passwordInput.value;
+
+      fetch('/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email, password: password })
+      }).then(function(response) {
+        if(response.ok) {
+          console.log("Login successful!");
+          // Handle successful login here (e.g. redirecting to another page or updating the UI)
+        } else {
+          console.log("Login failed!");
+          // Handle login failure here (e.g. displaying an error message)
+        }
+      }).catch(function(error) {
+        console.error('Error:', error);
+      });
+    });
+  </script>
 </body>
 </html>

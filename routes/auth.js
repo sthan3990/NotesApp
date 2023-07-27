@@ -16,14 +16,14 @@ function generateRandomString() {
 
 // Registration Page
 router.get("/register", (req, res) => {
-  // INSERT FRONT END HERE
+  res.render('register');
 });
 
 // Creating a new user
 router.post("/register", (req, res) => {
-  const email = req.query.email;
-  console.log(email, req.query.password);
-  const password = bcrypt.hashSync(req.query.password, 10);
+  const email = req.body.email;
+  console.log(email, req.body.password);
+  const password = bcrypt.hashSync(req.body.password, 10);
   if (!email || !password) {
     res.status(400).send("Please provide both a valid email and password");
   } else {
@@ -52,9 +52,11 @@ router.post("/register", (req, res) => {
 });
 
 // Login
-router.get("/login", (req, res) => {
-  // INSERT FRONT END HERE
+router.get('/login', function(req, res) {
+  // user is not logged in, so pass null for user
+  res.render('login', { user: null });
 });
+
 
 router.post("/login", (req, res) => {
   const email = req.body.email;
@@ -73,7 +75,7 @@ router.post("/login", (req, res) => {
       }
 
       // Set the user_id cookie with the matching user's ID
-      req.session.user_id = response.rows[0].user_id;
+      req.session.user_id = results.rows[0].user_id;
 
       // Redirect to user's profile
       res.redirect("/");
