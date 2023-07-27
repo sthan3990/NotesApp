@@ -1,11 +1,13 @@
-const express = require('express');
-const router  = express.Router();
+const express = require("express");
+const router = express.Router();
 const bcrypt = require("bcrypt");
-const promise = require('bluebird');
+const promise = require("bluebird");
+
 const initOptions = {
-    promiseLib: promise
+  promiseLib: promise,
 };
-const db = require('../db/connection');
+
+const db = require("../db/connection");
 
 // Helper function to generate random string
 function generateRandomString() {
@@ -14,35 +16,38 @@ function generateRandomString() {
 
 // Registration Page
 router.get("/register", (req, res) => {
-  // INSERT FRONT END HERE
+  res.render("register");
 });
 
 // Creating a new user
 router.post("/register", (req, res) => {
-  const email = req.query.email;
-  console.log(email,req.query.password);
-  const password = bcrypt.hashSync(req.query.password, 10);
+  const email = req.body.email;
+  console.log(email, req.body.password);
+  const password = bcrypt.hashSync(req.body.password, 10);
   if (!email || !password) {
     res.status(400).send("Please provide both a valid email and password");
   } else {
-    db.query('SELECT * FROM Users WHERE email = $1', [email])
-      .then(results => {
+    db.query("SELECT * FROM users WHERE email = $1", [email])
+      .then((results) => {
         if (results.rows.length > 0) {
           res.status(400).send("This account already exists");
         } else {
-          db.query('INSERT INTO Users(username, password, email) VALUES($1, $2, $3) RETURNING user_id', [email, password, email])
+          db.query(
+            "INSERT INTO users(username, password, email) VALUES($1, $2, $3) RETURNING user_id",
+            [email, password, email]
+          )
             .then((response) => {
               console.log(response);
               req.session.user_id = response.rows[0].user_id;
               res.redirect("/"); // Redirect to user's profile
             })
-            .catch(error => {
+            .catch((error) => {
               // handle error
               console.log(error);
             });
         }
       })
-      .catch(error => {
+      .catch((error) => {
         // handle error
         console.log(error);
       });
@@ -50,8 +55,9 @@ router.post("/register", (req, res) => {
 });
 
 // Login
-router.get("/login", (req, res) => {
-  // INSERT FRONT END HERE
+router.get("/login", function (req, res) {
+  // user is not logged in, so pass null for user
+  res.render("login", { user: null });
 });
 
 router.post("/login", (req, res) => {
@@ -59,24 +65,24 @@ router.post("/login", (req, res) => {
   const password = req.body.password;
 
   // Look up the user by email
-  db.query('SELECT * FROM Users WHERE email = $1', [email])
-    .then(results => {
+  db.query("SELECT * FROM users WHERE email = $1", [email])
+    .then((results) => {
       if (results.rows.length <= 0) {
         return res.status(400).send("Email account does not exist");
-      } 
-      const user = results.rows[0]
+      }
+      const user = results.rows[0];
       // Check to see if the user exists and if the password matches
       if (!user || !bcrypt.compareSync(password, user.password)) {
         return res.status(403).send("Invalid email or password.");
       }
 
       // Set the user_id cookie with the matching user's ID
-      req.session.user_id = response.rows[0].user_id;
+      req.session.user_id = results.rows[0].user_id;
 
       // Redirect to user's profile
       res.redirect("/");
     })
-    .catch(error => {
+    .catch((error) => {
       // handle error
       console.log(error);
     });
@@ -89,5 +95,3 @@ router.post("/logout", (req, res) => {
 });
 
 module.exports = router;
-
-
