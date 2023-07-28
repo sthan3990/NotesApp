@@ -46,7 +46,6 @@ router.post("/register", (req, res) => {
   if (!email || !password) {
     res.status(400).send("Please provide both a valid email and password");
   } else {
-
     db.query("SELECT * FROM users WHERE email = $1", [email])
       .then((results) => {
         if (results.rows.length > 0) {
@@ -70,8 +69,8 @@ router.post("/register", (req, res) => {
               )
                 .then((response) => {
                   res.redirect("/"); // Redirect to user's profile
-                })
-            })
+                });
+            });
         }
       })
       .catch((error) => {
