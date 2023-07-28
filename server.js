@@ -84,6 +84,7 @@ app.use("/api/openai", chatRoutes);
 app.use("/tasks", tasksRoutes);
 
 app.use("/login", authRoutes);
+app.use("/logout", authRoutes);
 
 // Note: mount other resources here, using the same pattern above
 
@@ -96,11 +97,6 @@ app.use("/login", authRoutes);
 app.get("/", (req, res) => {
   res.render("login");
 });
-
-//Login
-// app.get("/login", (req, res) => {
-//   res.render("login", { user: req.user || {} });
-// });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

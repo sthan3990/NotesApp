@@ -108,6 +108,8 @@ router.post("/login", (req, res) => {
 
 // Logout
 router.post("/logout", (req, res) => {
+  console.log("HERE");
+  res.clearCookie();
   req.session = null;
   res.redirect("/login");
 });
