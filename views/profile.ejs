@@ -4,7 +4,9 @@
 <head>
   <title>Profile Page</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
@@ -27,36 +29,31 @@
 
 </head>
 
-<body>
 
-  <% include ./partials/_header %>
+  <%- include('partials/_header') %>
 
-    <div class="container">
-      <div class="img-container">
-        <div class="buttons">
-          <div class="btn-login">
-            <span>Login</span>
-          </div>
-          <div class="btn-register">
-            <span>Register</span>
-          </div>
-        </div>
-      </div>
+  <nav class="nav-area">
+    <a class="home" href="/">Home</a>
+    <a class="eat" href="/tasks/1">Eat</a>
+    <a class="watch" href="/tasks/2">Watch</a>
+    <a class="read" href="/tasks/3">Read</a>
+    <a class="buy" href="/tasks/4">Buy</a>
+    <a class="do" href="/tasks/5">Do</a>
+    <a class="other" href="/tasks/6">Other</a>
+  </nav>
 
-
-      <!--User Profile Page-->
-      <main>
-        <form method="POST" id="update-profile">
-          <h2 class="text-center">User Profile/h2>
+  <main>
+    <div class="profileform" style="padding: 20px;">
+          <h1>User Profile</h1>
             <hr>
-
-            <div class="form-group">
+            <form method="POST" name="update-profile">
+            <div class="form-group2" style="padding: 10px;">
               <label>User ID</label>
               <input type="id" class="form-control" name="id"
-                value="<%= user.id %>" disabled>
+                value="<%= user.username %>" disabled>
             </div>
 
-            <div class="form-group">
+            <div class="form-group2" style="padding: 10px;">
               <label>Email Address</label>
               <input
               type="email"
@@ -65,7 +62,7 @@
               value="<%= user.email %>">
             </div>
 
-            <div class="form-group">
+            <div class="form-group2" style="padding: 10px;">
               <label>Username</label>
               <input
               type="name"
@@ -74,7 +71,7 @@
               value="<%= user.name %>">
             </div>
 
-            <div class="form-group">
+            <div class="form-group2" style="padding: 10px;">
               <label>Password</label>
               <input
               type="password"
@@ -83,15 +80,13 @@
                value="<%= user.password %>">
             </div>
 
-            <div class="form-group">
+            <div class="form-group2" style="padding: 10px;">
               <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </form>
-    </div>
+      </div>
     </main>
 
-
-</body>
 
 
 </html>
