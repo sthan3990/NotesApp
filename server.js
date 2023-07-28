@@ -73,7 +73,7 @@ const tasksRoutes = require("./routes/tasks");
 app.use("/api/users", userApiRoutes);
 app.use("/api/widgets", widgetApiRoutes);
 
-app.use("/GoChat", chatRoutes);
+// app.use("/gotochat", chatRoutes);
 app.use("/chat", chatRoutes);
 app.use("/api/openai", chatRoutes);
 
@@ -98,6 +98,12 @@ app.use("/tasks", tasksRoutes);
 app.get("/", (req, res) => {
   res.render("index");
 });
+
+app.post('/gotochat', (req, res) => {
+  const userTask = req.body.taskarea;
+  res.render('chat', { message: userTask });
+});
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

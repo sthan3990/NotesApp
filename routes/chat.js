@@ -14,11 +14,7 @@ router.get('/', (req, res) => {
   res.render('chat');
 });
 
-router.post('/GoChat', (req, res) => {
 
-  res.render('chat');
-
-});
 
 router.post('/', async (req, res) => {
   try {
@@ -47,7 +43,6 @@ router.post('/', async (req, res) => {
         },
       }
     );
-
 
     const messageArray = JSON.stringify(response.data.choices[0].message.content).split("//");
 
