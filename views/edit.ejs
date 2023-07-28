@@ -38,6 +38,7 @@
   <label class="tasklabel">Task Name</label>
     <input class="taskname" name="taskname" value="<%= tasks[0].name %>"/>
   </div>
+
 <div class="wrapper">
   <label class="catname">Category Name</label>
   <select class="category" name="category"> 
@@ -49,6 +50,15 @@
   <option><%= catNames[5].name %></option> 
 </select>
 </div>
+
+<div class="wrapper">
+  <label class="completed" style="padding-top: 15px; font-size: 30px";>Completed Task</label>
+  <select class="completed" name="completed" style="font-size: 20px"> 
+  <option>True</option> 
+  <option>False</option>
+</select>
+</div>
+
 <button class="edit" value="Edit">Edit</button>
 </form>
 </div>

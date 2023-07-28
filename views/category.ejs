@@ -57,9 +57,12 @@
             <button type="submit"><a href="/tasks/edit/<%= tasks[id].c_id %>/<%= tasks[id].t_id %>">Edit</a></button>
           </td>
           <td>
-            <form method="POST" action="/tasks/<%= tasks[id].c_id %>/<%= tasks[id].t_id %>/complete">
-            <input class="form-check-input" name="checked" type="checkbox" value="true" onChange="this.form.submit()">
-            </form>
+            <% if (tasks) { %>
+              <%= tasks[0].completed %>
+            <% } else { %>
+              <%=   %>
+            <% } %>
+
           </td>
         </tr>
       <% } %>

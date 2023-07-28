@@ -9,13 +9,8 @@ router.get("/:id", (req, res) => {
   const userID = req.session.user_id;
   taskQueries
     .getTasks(id, userID)
-    .then(({ categoryName, tasks }) => {
-      res.render("category", {
-        categoryName,
-        tasks,
-        user: userID,
-        username: tasks[0],
-      });
+    .then(({ categoryName, tasks, username }) => {
+      res.render("category", { categoryName, tasks, username, user: userID });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
@@ -55,23 +50,10 @@ router.post("/edit/:c_id/:id", (req, res) => {
   const taskId = req.params.id;
   const taskName = req.body.taskname;
   const categoryName = req.body.category;
+  const completed = req.body.completed;
   taskQueries
-    .editTask(taskId, taskName, categoryName)
+    .editTask(taskId, taskName, categoryName, completed)
     .then(res.redirect(`/`))
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
-});
-
-// updates task to completed / true
-router.post("/:c_id/:id/complete", (req, res) => {
-  const id = req.params.id;
-  const c_id = req.params.c_id;
-  taskQueries
-    .completeTask(id)
-    .then((result) => {
-      res.redirect(`/tasks/${c_id}`);
-    })
     .catch((err) => {
       res.status(500).json({ error: err.message });
     });

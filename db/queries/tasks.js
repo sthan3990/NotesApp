@@ -27,7 +27,11 @@ const getTasks = async (id, userID) => {
         [id, userID]
       )
     ).rows;
-    return { categoryName, tasks };
+    const username = (
+      await db.query(`SELECT username FROM users WHERE id = $1`, [userID])
+    ).rows[0];
+    console.log(categoryName, tasks, username);
+    return { categoryName, tasks, username };
   } catch (err) {
     console.error(err.message);
   }
@@ -65,7 +69,7 @@ const deleteTask = async (id) => {
 };
 
 // edit task given id to show
-const editTask = async (taskId, taskName, categoryName) => {
+const editTask = async (taskId, taskName, categoryName, completed) => {
   try {
     const catId = (
       await db.query(`SELECT id FROM categories WHERE name = $1`, [
@@ -80,16 +84,9 @@ const editTask = async (taskId, taskName, categoryName) => {
       taskName,
       taskId,
     ]);
-  } catch (error) {
-    console.error(error.stack);
-  }
-};
-
-// update completed task to true
-const completeTask = async (id) => {
-  try {
-    await db.query("UPDATE tasks SET status = 'TRUE' WHERE tasks.id = $1", [
-      id,
+    await db.query("UPDATE tasks SET completed = $4 WHERE id = $2", [
+      completed,
+      taskId,
     ]);
   } catch (error) {
     console.error(error.stack);
@@ -119,5 +116,4 @@ module.exports = {
   editTask,
   getTaskById,
   insertTask,
-  completeTask,
 };
