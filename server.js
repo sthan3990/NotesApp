@@ -75,17 +75,17 @@ app.use("/api/widgets", widgetApiRoutes);
 
 app.use("/GoChat", chatRoutes);
 app.use("/chat", chatRoutes);
-app.use("/users", usersRoutes);
+app.use("/api/openai", chatRoutes);
 
 app.use("/", authRoutes);
-app.use("/profile", profileRoutes);
+app.use("/login", authRoutes);
+app.use("/logout", authRoutes);
 
-app.use("/api/openai", chatRoutes);
+app.use("/profile", profileRoutes);
+app.use("/users", usersRoutes);
 
 app.use("/tasks", tasksRoutes);
 
-app.use("/login", authRoutes);
-app.use("/logout", authRoutes);
 
 // Note: mount other resources here, using the same pattern above
 
