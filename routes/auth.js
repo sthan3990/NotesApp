@@ -31,7 +31,6 @@ router.get("/", (req, res) => {
         res.status(500).json({ error: err.message });
       });
   }
-
 });
 
 // Registration Page
@@ -56,7 +55,7 @@ router.post("/register", (req, res) => {
           // create the user
           db.query(
             "INSERT INTO users(username, password, email) VALUES($1, $2, $3) RETURNING *",
-            [email, password, email]
+            [username, password, email]
           )
             .then((response) => {
               req.session.user_id = response.rows[0].id;
