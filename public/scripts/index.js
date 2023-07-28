@@ -1,9 +1,9 @@
 // Client facing scripts here
 $(() => {
-  $('#logoutbtn').on('click', () => {
+  $('#newtaskbtn').on('click', () => {
     $.ajax({
       method: 'POST',
-      url: '/logout'
+      url: '/gotochat'
     });
   });
 });

@@ -10,7 +10,9 @@
         <h1>OpenAI Chatbot</h1>
         <div id="chatBox"></div>
         <form id="chatForm">
-            <input type="text" id="userInput" placeholder="Enter your message..." required>
+            <input type="text"
+                   id="userInput"
+                   value="<%= message %>" required>
             <button type="submit">Send</button>
         </form>
     </div>
