@@ -30,7 +30,6 @@ const getTasks = async (id, userID) => {
     const username = (
       await db.query(`SELECT username FROM users WHERE id = $1`, [userID])
     ).rows[0];
-    console.log(categoryName, tasks, username);
     return { categoryName, tasks, username };
   } catch (err) {
     console.error(err.message);
@@ -84,7 +83,7 @@ const editTask = async (taskId, taskName, categoryName, completed) => {
       taskName,
       taskId,
     ]);
-    await db.query("UPDATE tasks SET completed = $4 WHERE id = $2", [
+    await db.query("UPDATE tasks SET completed = $1 WHERE id = $2", [
       completed,
       taskId,
     ]);
@@ -102,8 +101,10 @@ const getTaskById = async (id, userID) => {
         [id, userID]
       )
     ).rows;
+    const taskstatus = (await db.query(`SELECT DISTINCT(completed) FROM tasks`))
+      .rows;
     const catNames = (await db.query(`SELECT name FROM categories;`)).rows;
-    return { tasks, catNames };
+    return { tasks, catNames, taskstatus };
   } catch (err) {
     console.error(err.message);
   }

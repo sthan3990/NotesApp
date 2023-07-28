@@ -37,8 +37,14 @@ router.get("/edit/:c_id/:id", (req, res) => {
   const userID = req.session.user_id;
   taskQueries
     .getTaskById(id, userID)
-    .then(({ tasks, catNames }) => {
-      res.render("edit", { tasks, catNames, user: userID, username: tasks[0] });
+    .then(({ tasks, catNames, taskstatus }) => {
+      res.render("edit", {
+        tasks,
+        catNames,
+        user: userID,
+        username: tasks[0],
+        taskstatus,
+      });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
@@ -53,7 +59,10 @@ router.post("/edit/:c_id/:id", (req, res) => {
   const completed = req.body.completed;
   taskQueries
     .editTask(taskId, taskName, categoryName, completed)
-    .then(res.redirect(`/`))
+    .then((result) => {
+      console.log(taskId, taskName, categoryName, completed);
+      res.redirect(`/`);
+    })
     .catch((err) => {
       res.status(500).json({ error: err.message });
     });

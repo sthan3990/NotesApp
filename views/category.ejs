@@ -57,12 +57,7 @@
             <button type="submit"><a href="/tasks/edit/<%= tasks[id].c_id %>/<%= tasks[id].t_id %>">Edit</a></button>
           </td>
           <td>
-            <% if (tasks) { %>
-              <%= tasks[0].completed %>
-            <% } else { %>
-              <%=   %>
-            <% } %>
-
+            <%= tasks[id].completed %>
           </td>
         </tr>
       <% } %>

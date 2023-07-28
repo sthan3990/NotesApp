@@ -52,10 +52,10 @@
 </div>
 
 <div class="wrapper">
-  <label class="completed" style="padding-top: 15px; font-size: 30px";>Completed Task</label>
+  <label style="padding-top: 15px; font-size: 30px";>Completed Task</label>
   <select class="completed" name="completed" style="font-size: 20px"> 
-  <option>True</option> 
-  <option>False</option>
+  <option><%= taskstatus[0].completed %></option> 
+  <option><%= taskstatus[1].completed %></option>
 </select>
 </div>
 
