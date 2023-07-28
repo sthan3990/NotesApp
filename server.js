@@ -82,6 +82,8 @@ app.use("/login", authRoutes);
 app.use("/logout", authRoutes);
 
 app.use("/profile", profileRoutes);
+app.use("/updateprofile", profileRoutes);
+
 app.use("/users", usersRoutes);
 
 app.use("/tasks", tasksRoutes);
