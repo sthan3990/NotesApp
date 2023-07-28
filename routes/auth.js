@@ -89,7 +89,6 @@ router.get("/login", function (req, res) {
 });
 
 router.post("/login", (req, res) => {
-
   const email = req.body.email;
   const password = req.body.password;
   // Look up the user by email
