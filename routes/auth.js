@@ -31,7 +31,6 @@ router.get("/", (req, res) => {
         res.status(500).json({ error: err.message });
       });
   }
-
 });
 
 // Registration Page
@@ -42,6 +41,7 @@ router.get("/register", (req, res) => {
 // Creating a new user
 router.post("/register", (req, res) => {
   const email = req.body.email;
+  const username = req.body.username;
   const password = bcrypt.hashSync(req.body.password, 10);
   if (!email || !password) {
     res.status(400).send("Please provide both a valid email and password");
@@ -51,18 +51,25 @@ router.post("/register", (req, res) => {
         if (results.rows.length > 0) {
           res.status(400).send("This account already exists");
         } else {
+          // create the user
           db.query(
             "INSERT INTO users(username, password, email) VALUES($1, $2, $3) RETURNING *",
-            [email, password, email]
+            [username, password, email]
           )
             .then((response) => {
-              console.log(response);
               req.session.user_id = response.rows[0].id;
-              res.redirect("/"); // Redirect to user's profile
-            })
-            .catch((error) => {
-              // handle error
-              console.log(error);
+
+              let today = Date.now();
+              today.getUTCDate();
+
+              // create dummy tasks
+              db.query(
+                "INSERT INTO tasks (name, category_id, user_id, completed, date) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+                ["example", "1", "1", "FALSE", today]
+              )
+                .then((response) => {
+                  res.redirect("/"); // Redirect to user's profile
+                });
             });
         }
       })
@@ -108,7 +115,6 @@ router.post("/login", (req, res) => {
       // handle error
       console.log(error);
     });
-
 });
 
 // Logout
