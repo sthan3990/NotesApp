@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const taskQueries = require("../db/queries/tasks");
-const bcrypt = require("bcrypt");
 
 // renders tasks belonging to specific user on each category page
 router.get("/:id", (req, res) => {
