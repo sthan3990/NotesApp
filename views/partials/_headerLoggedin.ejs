@@ -1,4 +1,5 @@
 <header>
+
   <a href="/" class="title">SMART TO DO</a>
   <i class="fa-solid fa-bolt-lightning fa-beat"></i>
 
@@ -6,12 +7,20 @@
 
     <button type="submit" class="btn btn-light" name="profilebtn"><a href="/profile">Profile</a></button>
 
-    <!-- <form method="POST" action="/logout">
-      <button type="submit" class="btn btn-light">Logout</button>
-      </button>
-      </form> -->
+    <button type="submit" class="btn btn-light" id="logoutbtn"
+    onclick="logout()" >Logout</button>
 
+    <script>
+    function logout() {
 
-    </button>
+      $.ajax({
+          method: 'POST',
+          url: '/logout',
+          success: function () {
+            window.location("http://localhost:8080");
+          }
+        });
+      }
+  </script>
   </div>
 </header>

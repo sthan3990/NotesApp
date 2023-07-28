@@ -22,7 +22,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public"))); // replace 'public' with the path to your static files directory
 
 // helmet for security
-app.use(helmet());
+app.use(helmet({  contentSecurityPolicy: false }));
 
 // Cookie Options
 app.use(
