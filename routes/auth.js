@@ -17,9 +17,10 @@ function generateRandomString() {
 
 router.get("/", (req, res) => {
   const userID = req.session.user_id;
-  console.log(userID);
+
   if (!userID) {
     res.render("login", { user: null });
+
   } else {
     taskQueries
       .getAllTasks(userID)
@@ -74,20 +75,23 @@ router.post("/register", (req, res) => {
 
 // Login
 router.get("/login", function (req, res) {
+
   // user is not logged in, so pass null for user
   res.render("login", { user: null });
+
 });
 
 router.post("/login", (req, res) => {
+
   const email = req.body.email;
   const password = req.body.password;
-
   // Look up the user by email
   db.query("SELECT * FROM users WHERE email = $1", [email])
     .then((results) => {
       if (results.rows.length <= 0) {
         return res.status(400).send("Email account does not exist");
       }
+
       const user = results.rows[0];
       // Check to see if the user exists and if the password matches
       if (!user || !bcrypt.compareSync(password, user.password)) {
@@ -104,11 +108,11 @@ router.post("/login", (req, res) => {
       // handle error
       console.log(error);
     });
+
 });
 
 // Logout
 router.post("/logout", (req, res) => {
-  console.log("HERE");
   res.clearCookie();
   req.session = null;
   res.redirect("/login");

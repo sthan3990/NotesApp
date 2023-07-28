@@ -73,6 +73,7 @@ const tasksRoutes = require("./routes/tasks");
 app.use("/api/users", userApiRoutes);
 app.use("/api/widgets", widgetApiRoutes);
 
+app.use("/GoChat", chatRoutes);
 app.use("/chat", chatRoutes);
 app.use("/users", usersRoutes);
 
@@ -95,7 +96,7 @@ app.use("/logout", authRoutes);
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("login");
+  res.render("index");
 });
 
 app.listen(PORT, () => {

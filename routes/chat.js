@@ -14,6 +14,12 @@ router.get('/', (req, res) => {
   res.render('chat');
 });
 
+router.post('/GoChat', (req, res) => {
+
+  res.render('chat');
+
+});
+
 router.post('/', async (req, res) => {
   try {
     const userMessage = req.body.user;
