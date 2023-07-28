@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const promise = require("bluebird");
 const taskQueries = require("../db/queries/tasks");
+const userQueries = require("../db/queries/users");
 
 const initOptions = {
   promiseLib: promise,
@@ -17,14 +18,17 @@ function generateRandomString() {
 
 // Registration Page
 router.get("/register", (req, res) => {
-  res.render("register");
+  const userID = req.session.user_id;
+  userQueries.getUsername(userID).then(({ username }) => {
+    res.render("register", { username, user: userID });
+  });
 });
 
 // Creating a new user
 router.post("/register", (req, res) => {
   const email = req.body.email;
-  console.log(email, req.body.password);
   const password = bcrypt.hashSync(req.body.password, 10);
+  const username = req.body.username;
   if (!email || !password) {
     res.status(400).send("Please provide both a valid email and password");
   } else {
@@ -35,10 +39,9 @@ router.post("/register", (req, res) => {
         } else {
           db.query(
             "INSERT INTO users(username, password, email) VALUES($1, $2, $3) RETURNING id",
-            [email, password, email]
+            [username, password, email]
           )
             .then((response) => {
-              console.log(response);
               req.session.user_id = response.rows[0].id;
               res.redirect("/"); // Redirect to user's profile
             })
@@ -55,12 +58,15 @@ router.post("/register", (req, res) => {
   }
 });
 
-// Login
-router.get("/login", function (req, res) {
-  // user is not logged in, so pass null for user
-  res.render("login", { user: null });
+// render login page
+router.get("/login", (req, res) => {
+  const userID = req.session.user_id;
+  userQueries.getUsername(userID).then(({ username }) => {
+    res.render("login", { username, user: userID });
+  });
 });
 
+// post login page
 router.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -95,12 +101,17 @@ router.post("/logout", (req, res) => {
   res.redirect("/login");
 });
 
+// render index page with logged in users tasks
 router.get("/", (req, res) => {
   const userID = req.session.user_id;
   taskQueries
     .getAllTasks(userID)
-    .then(({ allTasks }) => {
-      res.render("index", { allTasks });
+    .then(({ allTasks, username }) => {
+      res.render("index", {
+        allTasks,
+        user: userID,
+        username,
+      });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });

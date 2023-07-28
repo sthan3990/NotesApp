@@ -3,7 +3,7 @@ const db = require("../connection");
 const insertTask = (message, category, userID, categoryName) => {
   return db
     .query(
-      `INSERT INTO tasks(item_name, category_id, user_id, status, date) VALUES ($1, $2, $3, $4, $5)
+      `INSERT INTO tasks(name, category_id, user_id, status, date) VALUES ($1, $2, $3, $4, $5)
     RETURNING *;`,
       [message, category, userID, categoryName]
     )
@@ -38,11 +38,14 @@ const getAllTasks = async (userID) => {
   try {
     const allTasks = (
       await db.query(
-        `SELECT categories.name as cat_name, tasks.name FROM categories JOIN tasks ON categories.id = tasks.category_id JOIN users ON users.id = tasks.user_id WHERE users.id = $1 GROUP BY categories.name, tasks.name;`,
+        `SELECT categories.name as cat_name, tasks.name, users.username FROM categories JOIN tasks ON categories.id = tasks.category_id JOIN users ON users.id = tasks.user_id WHERE users.id = $1 GROUP BY categories.name, tasks.name, users.username;`,
         [userID]
       )
     ).rows;
-    return { allTasks };
+    const username = (
+      await db.query(`SELECT username FROM users WHERE id = $1;`, [userID])
+    ).rows[0];
+    return { allTasks, username };
   } catch (err) {
     console.error(err.message);
   }
@@ -82,6 +85,17 @@ const editTask = async (taskId, taskName, categoryName) => {
   }
 };
 
+// update completed task to true
+const completeTask = async (id) => {
+  try {
+    await db.query("UPDATE tasks SET status = 'TRUE' WHERE tasks.id = $1", [
+      id,
+    ]);
+  } catch (error) {
+    console.error(error.stack);
+  }
+};
+
 // gets task given taskid for edit page
 const getTaskById = async (id, userID) => {
   try {
@@ -105,4 +119,5 @@ module.exports = {
   editTask,
   getTaskById,
   insertTask,
+  completeTask,
 };

@@ -1,6 +1,6 @@
-<nav class="nav">
-  <% if (user && user.id) { %>
-  <div class="dropdown" id="user-icon" data-id="<%= user.id %>">
+<header>
+  <% if (user) { %>
+  <div class="dropdown" id="user-icon" data-id="<%= user %>">
     <div>
       <a href="#" data-toggle="modal" data-target="#modalRegisterForm"><i class="far fa-comment" data-toggle="modal"
           data-target="#modalRegisterForm"></i>
@@ -8,7 +8,7 @@
       </a>
       <i class="fas fa-user-astronaut"></i>
     </div>
-    <div class="username-holder"><%= user.name %></div>
+    <div class="username-holder"><%= user %></div>
     <div class="dropdown-content">
       <form action="/logout" method="POST">
         <div id="logout">Logout</div>
@@ -18,4 +18,4 @@
   <% } else { %>
   <!-- Show a login or signup button? -->
   <% } %>
-</nav>
+  </header>

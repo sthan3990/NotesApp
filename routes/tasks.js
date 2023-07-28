@@ -10,7 +10,12 @@ router.get("/:id", (req, res) => {
   taskQueries
     .getTasks(id, userID)
     .then(({ categoryName, tasks }) => {
-      res.render("category", { categoryName, tasks });
+      res.render("category", {
+        categoryName,
+        tasks,
+        user: userID,
+        username: tasks[0],
+      });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
@@ -38,7 +43,7 @@ router.get("/edit/:c_id/:id", (req, res) => {
   taskQueries
     .getTaskById(id, userID)
     .then(({ tasks, catNames }) => {
-      res.render("edit", { tasks, catNames });
+      res.render("edit", { tasks, catNames, user: userID, username: tasks[0] });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });

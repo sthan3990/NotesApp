@@ -2,7 +2,7 @@ header {
   height: 120px;
   background: #cbe1e3;
   color: #001f73;
-  font-size: 50px;
+  font-size: 20px;
   font-family: Frutiger Linotype;
   position: fixed;
   width: 100%;
@@ -18,11 +18,6 @@ header {
 
 i {
   margin-top: 20px;
-}
-
-.header-right {
-  float: right;
-  padding: 15px;
 }
 
 .header-right a {
@@ -264,4 +259,8 @@ body {
 
 .form-control {
   width: 30%;
+}
+
+#profileform {
+  padding: 40px;
 }
