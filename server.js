@@ -79,7 +79,7 @@ app.use("/api/openai", chatRoutes);
 
 app.use("/", authRoutes);
 app.use("/login", authRoutes);
-app.use("/logout", authRoutes);
+// app.use("/logout", authRoutes);
 
 app.use("/profile", profileRoutes);
 app.use("/updateprofile", profileRoutes);
@@ -102,10 +102,10 @@ app.get("/", (req, res) => {
 });
 
 app.post('/gotochat', (req, res) => {
-  const userTask = req.body.taskarea;
+  const userTask = req.body.taskname;
+  console.log(userTask);
   res.render('chat', { message: userTask });
 });
-
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

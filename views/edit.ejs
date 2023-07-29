@@ -8,10 +8,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
 
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
 
-=  <script defer src="/scripts/app.js"></script>
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script defer src="/scripts/app.js"></script>
 
   <script src="https://kit.fontawesome.com/7d828f8d7a.js" crossorigin="anonymous"></script>
 
@@ -35,6 +38,7 @@
   <label class="tasklabel">Task Name</label>
     <input class="taskname" name="taskname" value="<%= tasks[0].name %>"/>
   </div>
+
 <div class="wrapper">
   <label class="catname">Category Name</label>
   <select class="category" name="category">
@@ -46,6 +50,15 @@
   <option><%= catNames[5].name %></option>
 </select>
 </div>
+
+<div class="wrapper">
+  <label style="padding-top: 15px; font-size: 30px";>Completed Task</label>
+  <select class="completed" name="completed" style="font-size: 20px">
+  <option><%= taskstatus[0].completed %></option>
+  <option><%= taskstatus[1].completed %></option>
+</select>
+</div>
+
 <button class="edit" value="Edit">Edit</button>
 </form>
 </div>

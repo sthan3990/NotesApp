@@ -48,7 +48,7 @@
       <% for (let id in tasks) { %>
         <tr>
           <td><%= tasks[id].name %></td>
-          <td><%= tasks[id].date %></td>
+          <td><%= tasks[id].date.toDateString() %></td>
           <td><form method="POST" action="/tasks/<%= tasks[id].c_id %>/<%= tasks[id].t_id %>/delete">
             <button type="submit">Delete</button>
           </form>
@@ -57,9 +57,7 @@
             <button type="submit"><a href="/tasks/edit/<%= tasks[id].c_id %>/<%= tasks[id].t_id %>">Edit</a></button>
           </td>
           <td>
-            <form method="POST" action="/tasks/<%= tasks[id].c_id %>/<%= tasks[id].t_id %>/complete"></form>
-            <input type="checkbox">
-          </form>
+            <%= tasks[id].completed %>
           </td>
         </tr>
       <% } %>

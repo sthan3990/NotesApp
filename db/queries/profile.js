@@ -1,8 +1,8 @@
 const db = require('../connection');
 const bcrypt = require("bcrypt");
 
-const getuserProfile = (email) => {
-  return db.query(`SELECT * FROM users WHERE email = $1`, [email])
+const getuserProfile = (id) => {
+  return db.query(`SELECT * FROM users WHERE id = $1`, [id])
     .then((result) => {
       return result.rows[0];
     })

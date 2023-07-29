@@ -6,7 +6,7 @@ const insertTask = (message, category, userID) => {
 
   return db
     .query(
-      `INSERT INTO tasks(id, name, category_id, user_id, completed, date) VALUES ($1, $2, $3, $4, $5)
+      `INSERT INTO tasks(name, category_id, user_id, completed, date) VALUES ($1, $2, $3, $4, $5)
     RETURNING *;`,
       [message, category, userID, 'FALSE', theDate]
     )
@@ -30,7 +30,10 @@ const getTasks = async (id, userID) => {
         [id, userID]
       )
     ).rows;
-    return { categoryName, tasks };
+    const username = (
+      await db.query(`SELECT username FROM users WHERE id = $1`, [userID])
+    ).rows[0];
+    return { categoryName, tasks, username };
   } catch (err) {
     console.error(err.message);
   }
@@ -41,11 +44,14 @@ const getAllTasks = async (userID) => {
   try {
     const allTasks = (
       await db.query(
-        `SELECT categories.name as cat_name, tasks.name FROM categories JOIN tasks ON categories.id = tasks.category_id JOIN users ON users.id = tasks.user_id WHERE users.id = $1 GROUP BY categories.name, tasks.name;`,
+        `SELECT categories.name as cat_name, tasks.name, users.username FROM categories JOIN tasks ON categories.id = tasks.category_id JOIN users ON users.id = tasks.user_id WHERE users.id = $1 GROUP BY categories.name, tasks.name, users.username;`,
         [userID]
       )
     ).rows;
-    return { allTasks };
+    const username = (
+      await db.query(`SELECT username FROM users WHERE id = $1;`, [userID])
+    ).rows[0];
+    return { allTasks, username };
   } catch (err) {
     console.error(err.message);
   }
@@ -65,7 +71,7 @@ const deleteTask = async (id) => {
 };
 
 // edit task given id to show
-const editTask = async (taskId, taskName, categoryName) => {
+const editTask = async (taskId, taskName, categoryName, completed) => {
   try {
     const catId = (
       await db.query(`SELECT id FROM categories WHERE name = $1`, [
@@ -78,6 +84,10 @@ const editTask = async (taskId, taskName, categoryName) => {
     );
     await db.query("UPDATE tasks SET name = $1 WHERE id = $2", [
       taskName,
+      taskId,
+    ]);
+    await db.query("UPDATE tasks SET completed = $1 WHERE id = $2", [
+      completed,
       taskId,
     ]);
   } catch (error) {
@@ -94,8 +104,10 @@ const getTaskById = async (id, userID) => {
         [id, userID]
       )
     ).rows;
+    const taskstatus = (await db.query(`SELECT DISTINCT(completed) FROM tasks`))
+      .rows;
     const catNames = (await db.query(`SELECT name FROM categories;`)).rows;
-    return { tasks, catNames };
+    return { tasks, catNames, taskstatus };
   } catch (err) {
     console.error(err.message);
   }

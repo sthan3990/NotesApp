@@ -44,10 +44,12 @@ router.post('/', async (req, res) => {
       }
     );
 
-    const messageArray = JSON.stringify(response.data.choices[0].message.content).split("//");
+    let check = JSON.stringify(response.data.choices[0].message);
 
-    if (messageArray.length > 0)
+    if (check.includes("//"))
     {
+      const messageArray = JSON.stringify(response.data.choices[0].message.content).split("//");
+
       // required parameters
       let taskName = messageArray[0].substring(1, messageArray[0].length).trim();
       let categoryID = messageArray[1].trim();
@@ -86,6 +88,7 @@ router.post('/', async (req, res) => {
     }
 
     res.json(response.data);
+
 
   } catch (error) {
     console.error(error);
