@@ -12,7 +12,9 @@ const getuserProfile = (id) => {
 };
 
 const updateuserProfile = (username, email, password) => {
-  const hasedPassword = bcrypt.hashSync(password, 10);
+  //const hasedPassword = bcrypt.hashSync(password, 10);
+
+  const hasedPassword = "password";
 
   return db.query(`UPDATE users SET username = $1, email = $2, password = $3
        WHERE users.email = $2;`, [username, email, hasedPassword])

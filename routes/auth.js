@@ -28,7 +28,8 @@ router.get("/register", (req, res) => {
 router.post("/register", (req, res) => {
   const email = req.body.email;
   const password = bcrypt.hashSync(req.body.password, 10);
-  const username = req.body.username;
+  const username = req.body.name;
+
   if (!email || !password) {
     res.status(400).send("Please provide both a valid email and password");
   } else {
