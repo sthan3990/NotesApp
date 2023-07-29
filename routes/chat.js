@@ -14,6 +14,8 @@ router.get("/", (req, res) => {
   res.render("chat");
 });
 
+
+
 router.post("/", async (req, res) => {
   try {
     const userMessage = req.body.user;
@@ -43,52 +45,57 @@ router.post("/", async (req, res) => {
       }
     );
 
-    const messageArray = JSON.stringify(
-      response.data.choices[0].message.content
-    ).split("//");
+    res.json(response.data);
 
-    // required parameters
-    let taskName = messageArray[0].substring(1, messageArray[0].length).trim();
-    let categoryID = messageArray[1].trim();
-    let categoryName = messageArray[2]
-      .substring(0, messageArray[2].length - 1)
-      .trim();
-    let theDate = new Date();
-    theDate.getUTCDate();
+    if (!response.data.choices[0].message.content)
+    {
+      const messageArray = JSON.stringify(
+        response.data.choices[0].message.content
+      ).split("//");
 
-    // Handle EAT response
-    if (taskName.length > 0) {
-      if (categoryID === "1" && categoryName.includes("Eat")) {
-        insertTask(taskName, categoryID, userID, categoryName);
-      }
+      // required parameters
+      let taskName = messageArray[0].substring(1, messageArray[0].length).trim();
+      let categoryID = messageArray[1].trim();
+      let categoryName = messageArray[2]
+        .substring(0, messageArray[2].length - 1)
+        .trim();
+      let theDate = new Date();
+      theDate.getUTCDate();
 
-      // Handle WATCH response
-      else if (categoryID === "2" && categoryName.includes("Watch")) {
-        insertTask(taskName, categoryID, userID, categoryName);
-      }
+      // Handle EAT response
+      if (taskName.length > 0) {
+        if (categoryID === "1" && categoryName.includes("Eat")) {
+          insertTask(taskName, categoryID, userID, categoryName);
+        }
 
-      // Handle READ response
-      else if (categoryID === "3" && categoryName.includes("Read")) {
-        insertTask(taskName, categoryID, userID, "FALSE", categoryName);
-      }
+        // Handle WATCH response
+        else if (categoryID === "2" && categoryName.includes("Watch")) {
+          insertTask(taskName, categoryID, userID, categoryName);
+        }
 
-      // Handle BUY response
-      else if (categoryID === "4" && categoryName.includes("Buy")) {
-        insertTask(taskName, categoryID, userID, "FALSE", categoryName);
-      }
+        // Handle READ response
+        else if (categoryID === "3" && categoryName.includes("Read")) {
+          insertTask(taskName, categoryID, userID, "FALSE", categoryName);
+        }
 
-      // Handle DO response
-      else if (categoryID === "5" && categoryName.includes("Do")) {
-        insertTask(taskName, categoryID, userID, categoryName);
-      }
+        // Handle BUY response
+        else if (categoryID === "4" && categoryName.includes("Buy")) {
+          insertTask(taskName, categoryID, userID, "FALSE", categoryName);
+        }
 
-      // Handle OTHER  response
-      else if (categoryID === "6" && categoryName.includes("Other")) {
-        insertTask(taskName, categoryID, userID, categoryName);
+        // Handle DO response
+        else if (categoryID === "5" && categoryName.includes("Do")) {
+          insertTask(taskName, categoryID, userID, categoryName);
+        }
+
+        // Handle OTHER  response
+        else if (categoryID === "6" && categoryName.includes("Other")) {
+          insertTask(taskName, categoryID, userID, categoryName);
+        }
       }
     }
 
-    res.json(response.data);
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Something went wrong." });

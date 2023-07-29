@@ -75,13 +75,14 @@ const { updateuserProfile } = require("./db/queries/profile");
 app.use("/api/users", userApiRoutes);
 app.use("/api/widgets", widgetApiRoutes);
 
+app.use("/api/openai", chatRoutes);
 app.use("/chat", chatRoutes);
+
 app.use("/users", usersRoutes);
 
 app.use("/", authRoutes);
 app.use("/profile", profileRoutes);
 
-app.use("/api/openai", chatRoutes);
 
 app.use("/tasks", tasksRoutes);
 
@@ -96,6 +97,12 @@ app.use("/tasks", tasksRoutes);
 //Login
 app.get("/login", (req, res) => {
   res.render("login", { user: req.user || {} });
+});
+
+app.post('/gotochat', (req, res) => {
+  const userTask = req.body.taskarea;
+  console.log(userTask);
+  res.render('chat', { message: userTask });
 });
 
 app.listen(PORT, () => {
