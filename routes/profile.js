@@ -37,7 +37,7 @@ router.get("/", (req, res) => {
     });
 });
 
-router.post("/update_profile", (req, res) => {
+router.post("/", (req, res) => {
   try {
     const username = req.body.username;
     const email = req.body.email;
