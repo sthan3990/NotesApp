@@ -11,7 +11,7 @@ const axios = require('axios');
 const { insertTask } = require('../db/queries/tasks');
 
 router.get('/', (req, res) => {
-  res.render('chat');
+  res.render('chat', { message: "Enter Task" });
 });
 
 
@@ -46,15 +46,15 @@ router.post('/', async (req, res) => {
 
     const messageArray = JSON.stringify(response.data.choices[0].message.content).split("//");
 
-    // required parameters
-    let taskName = messageArray[0].substring(1, messageArray[0].length).trim();
-    let categoryID = messageArray[1].trim();
-    let categoryName = messageArray[2].substring(0, messageArray[2].length - 1).trim();
-    let theDate = new Date();
-    theDate.getUTCDate();
+    if (messageArray.length > 0)
+    {
+      // required parameters
+      let taskName = messageArray[0].substring(1, messageArray[0].length).trim();
+      let categoryID = messageArray[1].trim();
+      let categoryName = messageArray[2].substring(0, messageArray[2].length - 1).trim();
+
 
     // Handle EAT response
-    if (taskName.length > 0) {
       if (categoryID === "1" && categoryName.includes("Eat")) {
         insertTask(taskName, categoryID, userID, categoryName);
       }
