@@ -3,9 +3,9 @@ const db = require("../connection");
 const insertTask = (message, category, userID, categoryName) => {
   return db
     .query(
-      `INSERT INTO tasks(name, category_id, user_id, status, date) VALUES ($1, $2, $3, $4, $5)
+      `INSERT INTO tasks(item_name, category_id, user_id, status, date) VALUES ($1, $2, $3, $4, $5)
     RETURNING *;`,
-      [message, category, userID, categoryName]
+      [message, category, userID, "FALSE", categoryName]
     )
     .then((result) => {
       return result.rows[0];
