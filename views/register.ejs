@@ -61,13 +61,16 @@
         var passwordInput = document.querySelector('input[name="password"]');
         var email = emailInput.value;
         var password = passwordInput.value;
+        var usernameInput = document.querySelector('input[name="name"]');
+        var username = usernameInput.value;
+        console.log(username)
 
-        fetch('/auth/register', {
+        fetch('/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ email: email, password: password })
+          body: JSON.stringify({ email: email, password: password, username: username })
         }).then(function(response) {
           if(response.ok) {
             console.log("Registration successful!");

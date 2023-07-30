@@ -43,6 +43,7 @@ router.post("/register", (req, res) => {
   const email = req.body.email;
   const username = req.body.username;
   const password = bcrypt.hashSync(req.body.password, 10);
+  console.log(email)
   if (!email || !password) {
     res.status(400).send("Please provide both a valid email and password");
   } else {
